@@ -23,8 +23,8 @@ const items = [
     {
         area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
         icon: <Box className="h-4 w-4 text-white dark:text-neutral-400" />,
-        title: "Do things the right way",
-        description: "Running out of copy so I'll write anything.",
+        title: "Tutoriel Potfolio en NextJs",
+        description: "build and deploy your own portfolio with NextJs",
     },
     {
         area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",

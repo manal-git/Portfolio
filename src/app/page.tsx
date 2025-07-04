@@ -254,9 +254,9 @@ export default function HomePage() {
               </button>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent"></div>
+          <div className="absolute -bottom-1 md:bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent"></div>
         </div>
-        <div ref={aboutRef} className="flex justify-between w-[80%] mx-auto rounded-md overflow-hidden my-14">
+        <div ref={aboutRef} className="flex md:flex-row flex-col justify-between w-[80%] mx-auto rounded-md overflow-hidden my-1 md:my-14">
           <div className="h-full">
             <div className="flex flex-col w-40 h-40 p-10 justify-center">
               <img src="/avatar.png" alt="" className="animate-[bounce_3s_ease-in-out_infinite]" />
@@ -285,8 +285,8 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex flex-col w-full gap-28">
-          <div className="flex justify-start w-full bg-neutral-900 py-5 rounded-md">
-            <div className="w-1/2 h-full flex gap-2 flex-col justify-center items-center">
+          <div className="flex md:flex-row flex-col justify-start w-full bg-neutral-900 py-5 rounded-md">
+            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
               <Card title="Développement" icon={<IconDeviceIpadHorizontalCode size={30} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
@@ -302,7 +302,7 @@ export default function HomePage() {
               </div>
               <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
             </div>
-            <div className="flex justify-center p-4">
+            <div className="flex w-full justify-center p-4">
               <ul className="text-yellow-50 font-mono grid grid-cols-2 md:gap-x-40 gap-x-5">
                 {skills.map((word: string, index: number) => (
                   <li key={index} className="flex items-center">
@@ -313,8 +313,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex w-full justify-between py-5 bg-neutral-900">
-            <div className="flex p-10 h-full w-1/2 justify-center items-center">
+          <div className="flex md:flex-row flex-col-reverse w-full justify-between py-5 bg-neutral-900">
+            <div className="flex p-10 h-full md:w-1/2 w-full justify-center items-center">
               <ul className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
                 <li className="flex flex-col gap-4">
                   <span className="flex gap-2 font-bold items-center">
@@ -341,7 +341,7 @@ export default function HomePage() {
                   Windows</li>
               </ul>
             </div>
-            <div className="w-1/2 h-full flex gap-2 flex-col justify-center items-center">
+            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
               <Card title="Système" icon={<IconDevicesPc size={30} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
@@ -360,8 +360,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex justify-start w-full py-5 bg-neutral-900">
-            <div className="w-1/2 h-full flex gap-2 flex-col justify-center items-center">
+          <div className="flex md:flex-row flex-col justify-start w-full py-5 bg-neutral-900">
+            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
               <Card title="Réseau" icon={<IconAntenna size={30} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
@@ -390,15 +390,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex justify-between w-full py-5 bg-neutral-900">
-            <div className='flex p-15 h-full w-1/2 justify-center items-center'>
+          <div className="flex md:flex-row flex-col-reverse justify-between w-full py-5 bg-neutral-900">
+            <div className='flex p-15 h-full md:w-1/2 w-full justify-center items-center'>
               <ol className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
                 <li className="flex items-center">{'>' + ' Anglais' + ' C1'}</li>
                 <li className="flex items-center">{'>' + ' Francais' + ' B1'}</li>
                 <li className="flex items-center">{'>' + ' Arab' + ' C1'}</li>
               </ol>
             </div>
-            <div className="w-1/2 h-full flex gap-2 flex-col justify-center items-center">
+            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
               <Card title="Langues" icon={<IconLanguage size={30} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
@@ -424,7 +424,7 @@ export default function HomePage() {
               Education
             </h2>
           </div>
-          <div className="flex flex-col w-[80%] mx-auto rounded-md overflow-hidden my-14">
+          <div className="flex flex-col md:w-[80%] w-full mx-auto rounded-md overflow-hidden my-14">
             <div className="p-4 bg-neutral-900 w-full h-6 flex items-center">
               <div className="w-full flex gap-1 justify-end items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -461,29 +461,29 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="w-full flex flex-col justify-center items-center m-10">
-            <div className="relative min-h-full md:min-h-screen flex flex-col justify-start items-center md:w-3/4 w-full px-5 bg-center bg-cover bg-no-repeat">
+            <div className="relative min-h-full md:min-h-screen flex flex-col justify-start items-center md:w-3/4 w-full px-0 md:px-5 bg-center bg-cover bg-no-repeat">
               <div className="relative w-full h-full">
                 <img src="/pc.png" alt="" className="md:flex hidden w-full z-50" />
                 <img src="/mobile.png" alt="" className="flex md:hidden w-full z-50" />
-                <div className="absolute top-10 w-3/4  left-1/8 h-full md:h-1/2 max-h-none -z-10 overflow-hidden py-4 px-6">
+                <div className="absolute top-10 w-3/4 left-1/8 h-full md:h-1/2 max-h-none -z-10 overflow-hidden py-4 px-6">
                   <Vortex>
                   </Vortex>
                 </div>
-                <div className="absolute md:top-12 top-22 md:left-30 left-22 flex md:flex-row flex-col flex-wrap gap-4">
-                  <div className="flex flex-col items-center justify-center w-14 md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/webtoona.png" alt="" className=""
+                <div className="absolute lg:top-12 md:top-[10%] top-[20%] lg:left-30 left-[30%] md:left-[25%] flex md:flex-row flex-col flex-wrap gap-4">
+                  <div className="flex flex-col items-center justify-center min-w-10 w-[20%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/webtoona.png" alt="" className="w-full"
                       onClick={() => setShowPopup("webtoona")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">Webtoona</p>
                   </div>
-                  <div className="flex flex-col items-center justify-center w-14 md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/jeu.png" alt="" className=""
+                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/jeu.png" alt="" className="w-full"
                       onClick={() => setShowPopup("jeu")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">jeu devinette</p>
                   </div>
-                  <div className="flex flex-col items-center justify-center w-14 md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/mode.png" alt="" className="p-1"
+                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/mode.png" alt="" className="p-1 w-full"
                       onClick={() => setShowPopup("mode")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">Walk your worth</p>
@@ -500,7 +500,7 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="w-full flex lg:flex-row p-8 flex-col gap-4">
-            <div className="flex lg:w-1/2 w-full gap-5 p-4 flex-wrap border-2 border-yellow-500">
+            <div className="flex lg:w-1/2 w-full gap-5 p-4 flex-wrap border-2 hover:bg-yellow-500 hover:text-black border-yellow-500">
               <div className="aspect-square w-30">
                 <img src="/cisco.png" alt="cisco" />
               </div>
@@ -516,7 +516,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-cyan-400 border-2">
+            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-cyan-400 hover:bg-cyan-400 hover:text-black border-2">
               <div className="aspect-square w-30">
                 <img src="/google.png" alt="cisco" />
               </div>
