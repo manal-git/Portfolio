@@ -15,6 +15,7 @@ import { Popup } from "@/components/ui/popup";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Grid } from "@/components/ui/grid-glow";
+import { Press_Start_2P } from "next/font/google";
 
 
 type Testimonial = { name: string; src: string };
@@ -27,6 +28,13 @@ type ProjectData = {
   gitlink?: string;
   testimonials?: Testimonial[];
 };
+
+const press = Press_Start_2P({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  fallback: ['sans-serif']
+});
 
 
 export default function HomePage() {
@@ -166,7 +174,6 @@ export default function HomePage() {
     },
   };
 
-
   return (
     <>
       {showPopup && (
@@ -242,7 +249,7 @@ export default function HomePage() {
                     setStarted(false);
                   }, 600);
                 }}
-                className="text-yellow-300 py-2 px-4 rounded-2xl cursor-pointer hover:animate-none animate-pulse transition font-retro duration-300">
+                className={`text-yellow-300 py-2 px-4 rounded-2xl cursor-pointer hover:animate-none animate-pulse transition duration-300 ${press.className}`}>
                 PRESS TO START
               </button>
             </div>
