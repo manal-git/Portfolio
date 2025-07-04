@@ -460,31 +460,35 @@ export default function HomePage() {
               Projets
             </h2>
           </div>
-          <div className="w-full flex flex-col justify-center items-center my-10">
-            <div className="relative flex flex-col justify-start items-center md:w-3/4 w-full md:max-w-[650px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px] overflow-hidden h-screen bg-[url(/phone.png)] md:bg-[url(/pc.png)] pt-[115px] md:pt-14 px-5 bg-center bg-cover bg-no-repeat">
-              <div className="w-full max-w-[255px] md:max-w-none h-full md:max-h-none max-h-[395px] overflow-hidden py-2 px-2">
-                <Vortex>
-                  <div className="flex flex-col gap-4">
-                    <div className="flex flex-col items-center justify-center w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                      <img src="/webtoona.png" alt="" className=""
-                        onClick={() => setShowPopup("webtoona")}
-                      />
-                      <p className="font-mono text-amber-50 text-[10px] text-center">Webtoona</p>
-                    </div>
-                    <div className="flex flex-col items-center justify-center w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                      <img src="/jeu.png" alt="" className=""
-                        onClick={() => setShowPopup("jeu")}
-                      />
-                      <p className="font-mono text-amber-50 text-[10px] text-center">jeu devinette</p>
-                    </div>
-                    <div className="flex flex-col items-center justify-center w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                      <img src="/mode.png" alt="" className="p-1"
-                        onClick={() => setShowPopup("mode")}
-                      />
-                      <p className="font-mono text-amber-50 text-[10px] text-center">Walk your worth</p>
-                    </div>
+          <div className="w-full flex flex-col justify-center items-center m-10">
+            <div className="relative min-h-full md:min-h-screen flex flex-col justify-start items-center md:w-3/4 w-full px-5 bg-center bg-cover bg-no-repeat">
+              <div className="relative w-full h-full">
+                <img src="/pc.png" alt="" className="md:flex hidden w-full z-50" />
+                <img src="/mobile.png" alt="" className="flex md:hidden w-full z-50" />
+                <div className="absolute top-10 w-3/4  left-1/8 h-full md:h-1/2 max-h-none -z-10 overflow-hidden py-4 px-6">
+                  <Vortex>
+                  </Vortex>
+                </div>
+                <div className="absolute md:top-12 top-22 md:left-30 left-22 flex md:flex-row flex-col flex-wrap gap-4">
+                  <div className="flex flex-col items-center justify-center w-14 md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/webtoona.png" alt="" className=""
+                      onClick={() => setShowPopup("webtoona")}
+                    />
+                    <p className="font-mono text-amber-50 text-[10px] text-center">Webtoona</p>
                   </div>
-                </Vortex>
+                  <div className="flex flex-col items-center justify-center w-14 md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/jeu.png" alt="" className=""
+                      onClick={() => setShowPopup("jeu")}
+                    />
+                    <p className="font-mono text-amber-50 text-[10px] text-center">jeu devinette</p>
+                  </div>
+                  <div className="flex flex-col items-center justify-center w-14 md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/mode.png" alt="" className="p-1"
+                      onClick={() => setShowPopup("mode")}
+                    />
+                    <p className="font-mono text-amber-50 text-[10px] text-center">Walk your worth</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -495,7 +499,7 @@ export default function HomePage() {
               Certificats
             </h2>
           </div>
-          <div className="w-full flex lg:flex-row flex-col gap-4">
+          <div className="w-full flex lg:flex-row p-8 flex-col gap-4">
             <div className="flex lg:w-1/2 w-full gap-5 p-4 flex-wrap border-2 border-yellow-500">
               <div className="aspect-square w-30">
                 <img src="/cisco.png" alt="cisco" />
