@@ -518,7 +518,7 @@ export default function HomePage() {
             </h2>
           </div>
           <div>
-            <div ref={aboutRef} className="flex justify-between w-[80%] mx-auto rounded-md overflow-hidden my-14">
+            <div className="flex justify-between w-[80%] mx-auto rounded-md overflow-hidden my-14">
               <div className="w-full rounded-lg overflow-hidden">
                 <div className="p-4 bg-neutral-900 w-full h-6 flex items-center">
                   <div className="w-full flex gap-1 justify-end items-center">
