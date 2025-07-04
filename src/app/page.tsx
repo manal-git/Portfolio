@@ -243,8 +243,8 @@ export default function HomePage() {
               <button
                 onClick={() => {
                   setStarted(true);
+                  audioRef.current?.play();
                   setTimeout(() => {
-                    audioRef.current?.play();
                     aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
                     setStarted(false);
                   }, 600);
@@ -314,7 +314,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex w-full justify-between py-5 bg-neutral-900">
-            <div className="flex p-10 h-full">
+            <div className="flex p-10 h-full w-1/2 justify-center items-center">
               <ul className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
                 <li className="flex flex-col gap-4">
                   <span className="flex gap-2 font-bold items-center">
@@ -391,7 +391,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex justify-between w-full py-5 bg-neutral-900">
-            <div className='flex p-15 h-full'>
+            <div className='flex p-15 h-full w-1/2 justify-center items-center'>
               <ol className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
                 <li className="flex items-center">{'>' + ' Anglais' + ' C1'}</li>
                 <li className="flex items-center">{'>' + ' Francais' + ' B1'}</li>
@@ -448,8 +448,8 @@ export default function HomePage() {
               Experiences
             </h2>
           </div>
-          <div>
-            <div className="w-full py-4">
+          <div className="w-full flex flex-col justify-center items-center">
+            <div className="lg:w-3/4 w-full py-4">
               <StickyScroll content={content} />
             </div>
           </div>
@@ -461,8 +461,8 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="w-full flex flex-col justify-center items-center my-10">
-            <div className="relative flex flex-col justify-start items-center w-3/4 overflow-hidden h-screen bg-[url(/pc.png)] pt-14 px-5 bg-center bg-cover bg-no-repeat">
-              <div className="w-3/4 overflow-hidden py-2">
+            <div className="relative flex flex-col justify-start items-center md:w-3/4 w-full md:max-w-[650px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px] overflow-hidden h-screen bg-[url(/phone.png)] md:bg-[url(/pc.png)] pt-[115px] md:pt-14 px-5 bg-center bg-cover bg-no-repeat">
+              <div className="w-full max-w-[255px] md:max-w-none h-full md:max-h-none max-h-[395px] overflow-hidden py-2 px-2">
                 <Vortex>
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-col items-center justify-center w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
@@ -495,26 +495,30 @@ export default function HomePage() {
               Certificats
             </h2>
           </div>
-          <div className="flex w-full gap-5 p-4">
-            <div className=" w-90">
-              <img src="/cisco.png" alt="cisco" />
+          <div className="w-full flex lg:flex-row flex-col gap-4">
+            <div className="flex lg:w-1/2 w-full gap-5 p-4 flex-wrap border-2 border-yellow-500">
+              <div className="aspect-square w-30">
+                <img src="/cisco.png" alt="cisco" />
+              </div>
+              <div className="flex flex-col gap-6">
+                <div className="p-5 font-retro text-white text-left">
+                  <p>Certificats Packet Tracer</p>
+                </div>
+                <div className="p-5 font-retro text-white text-left">
+                  <p>Certificats Networking Basics</p>
+                </div>
+                <div className="p-5 font-retro text-white text-left">
+                  <p>Certificats CSS Essentials</p>
+                </div>
+              </div>
             </div>
-            <div className="p-5 border-amber-300 hover:bg-amber-300 border-2 font-retro text-white text-center">
-              <p className="">Certificats Packet Tracer</p>
-            </div>
-            <div className="p-5 border-green-500 hover:bg-green-500 border-2 font-retro text-white text-center">
-              <p>Certificats Networking Basics</p>
-            </div>
-            <div className="p-5 border-red-500 hover:bg-red-500 border-2 font-retro text-white text-center">
-              <p>Certificats CSS Essentials</p>
-            </div>
-          </div>
-          <div className="flex w-full gap-5 p-4">
-            <div className="flex w-48">
-              <img src="/google.png" alt="cisco" />
-            </div>
-            <div className="p-5 border-cyan-400 hover:bg-cyan-400 border-2 font-retro text-white text-center">
-              <p className="">Certificats Google Analytics</p>
+            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-cyan-400 border-2">
+              <div className="aspect-square w-30">
+                <img src="/google.png" alt="cisco" />
+              </div>
+              <div className="p-5 font-retro text-white text-left">
+                <p className="">Certificats Google Analytics</p>
+              </div>
             </div>
           </div>
         </div>
