@@ -37,9 +37,6 @@ export const AnimatedTestimonials = ({
     }
   }, [autoplay]);
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
   return (
     <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
       <div className="flex flex-col gap-20">
@@ -53,23 +50,20 @@ export const AnimatedTestimonials = ({
                     opacity: 0,
                     scale: 0.9,
                     z: -100,
-                    rotate: randomRotateY(),
                   }}
                   animate={{
-                    opacity: isActive(index) ? 1 : 0.7,
-                    scale: isActive(index) ? 1 : 0.95,
+                    opacity: isActive(index) ? 1 : 0,
+                    scale: isActive(index) ? 1 : 1,
                     z: isActive(index) ? 0 : -100,
-                    rotate: isActive(index) ? 0 : randomRotateY(),
                     zIndex: isActive(index)
                       ? 40
                       : testimonials.length + 2 - index,
-                    y: isActive(index) ? [0, -80, 0] : 0,
+                    y: isActive(index) ? 0 : 0,
                   }}
                   exit={{
                     opacity: 0,
                     scale: 0.9,
                     z: 100,
-                    rotate: randomRotateY(),
                   }}
                   transition={{
                     duration: 0.4,
@@ -77,7 +71,7 @@ export const AnimatedTestimonials = ({
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
-                  <div className="flex flex-col bg-black rounded-xl p-2 gap-3">
+                  <div className="flex flex-col rounded-xl p-2 gap-3">
                     <div className="h-full w-full flex justify-center items-center">
                       <img
                         src={testimonial.src}
@@ -90,7 +84,7 @@ export const AnimatedTestimonials = ({
                     </div> 
                     <div className="flex items-center justify-center rounded-3xl ">
                       <h3
-                        className="font-retro text-white text-center bg-black py-2 px-4 rounded-3xl"
+                        className="font-retro text-white text-center py-2 px-4 rounded-3xl"
                       >
                         {testimonial.name}
                       </h3>
@@ -106,13 +100,13 @@ export const AnimatedTestimonials = ({
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-sky-500 border-2 border-sky-600 dark:bg-neutral-800"
+              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-500 border-2 border-gray-600 dark:bg-neutral-800"
             >
               <IconArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
             </button>
             <button
               onClick={handleNext}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-purple-500 border-2 border-purple-600 dark:bg-neutral-800"
+              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-neutral-500 border-2 border-neutral-600 dark:bg-neutral-800"
             >
               <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
             </button>

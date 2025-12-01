@@ -4,7 +4,7 @@ import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import Card from "@/components/ui/card";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandUbuntu, IconBrandWindows, IconDeviceIpadHorizontalCode, IconDevicesPc, IconLanguage } from '@tabler/icons-react';
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinux } from '@fortawesome/free-brands-svg-icons'
 import { faDragon } from '@fortawesome/free-solid-svg-icons'
@@ -39,7 +39,11 @@ const press = Press_Start_2P({
 
 export default function HomePage() {
 
-  const intro = ["Je", "me", "présente!", "Je", "suis", "étudiante", "en", "BTS", "Services", "Informatiques", "aux", "Organisations", "(SIO),", "spécialisée", "dans", "le", "développement", "d'applications.", "Ce", "portfolio", "témoigne", "de", "mon", "engagement", "à", "transformer", "les", "compétences", "acquises", "au", "cours", "de", "ma", "formation", "en", "réalisations", "concrètes", "et", "structurées,", "illustrant", "ma", "passion", "pour", "l'informatique", "et", "mon", "envie", "constante", "d'apprendre", "et", "d'évoluer.", "Bienvenue", "et", "bonne", "découverte", "de", "mon", "portfolio."];
+  const intro = ["Je", "me", "présente!", "Je", "suis", "étudiante", "en", "BTS", "Services", "Informatiques",
+    "aux", "Organisations", "(SIO),", "spécialisée", "dans", "le", "développement", "d'applications.",
+    "Ce", "portfolio", "témoigne", "de", "mon", "engagement", "à", "transformer", "les", "compétences",
+    "acquises", "au", "cours", "de", "ma", "formation", "en", "réalisations", "concrètes", "et", "structurées,",
+    "illustrant", "ma", "passion", "pour", "l'informatique", "et", "mon", "envie", "constante", "d'apprendre", "et", "d'évoluer.", "Bienvenue", "et", "bonne", "découverte", "de", "mon", "portfolio."];
   const veille = [
     "Pour", "rester", "informé", "des", "nouveautés", "dans", "le", "domaine", "du", "développement,",
     "j’ai", "utilisé", "l’extension", "daily.dev", "sur", "mon", "navigateur,",
@@ -60,7 +64,7 @@ export default function HomePage() {
   const content = [
     {
       title: "Professionnelle",
-      subtitle: "Stage de 2 mois chez Turnadon - Paris (2025)",
+      subtitle: "Stage de 2 mois chez Turnadon du 18 mai au 4 juillet - Paris (2025)",
       description: [
         "Développement front-end avec React, Tailwind CSS et Redux Toolkit (pages, thèmes, responsive design).",
         "Développement back-end avec Node.js et Express (API REST, base de données, routes).",
@@ -77,6 +81,29 @@ export default function HomePage() {
           <img src="/stage.png" alt="" className="p-4" />
         </motion.div>
       ),
+
+
+    },
+    {
+      subtitle: "Stage de 2 mois chez Turnadon du 1 decembre au 23 janvier - Paris (2025)",
+      description: [
+        "Développement front-end avec React, Tailwind CSS et Redux Toolkit (pages, thèmes, responsive design).",
+        "Développement back-end avec Node.js et Express (API REST, base de données, routes).",
+        "Intégration d’un système d’upload de médias via AWS S3.",
+        "Utilisation de Git, GitHub et Postman pour la gestion de projet et les tests.",
+        "Renforcement des compétences en développement full-stack, gestion d’état, design réactif et intégration cloud.",
+      ],
+      content: (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+          <img src="/stage.png" alt="" className="p-4" />
+        </motion.div>
+      ),
+
+
     },
     {
       subtitle: "Stylist - ile de france (2020 - 2022)",
@@ -178,29 +205,31 @@ export default function HomePage() {
     <>
       {showPopup && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50 "
           onClick={() => setShowPopup(null)}
         >
           {(() => {
             const data = popupContent[showPopup];          // ProjectData garanti
 
             return (
-              <Popup
-                title={data.title}
-                description={data.description}
-                icon={data.icon}
-                doc={data.doc}
-                gitlink={data.gitlink}
-                onClose={() => setShowPopup(null)}
-                testimonials={
-                  data.testimonials ? (
-                    <AnimatedTestimonials
-                      testimonials={data.testimonials}
-                      autoplay
-                    />
-                  ) : null
-                }
-              />
+              <AnimatePresence>
+                <Popup
+                  title={data.title}
+                  description={data.description}
+                  icon={data.icon}
+                  doc={data.doc}
+                  gitlink={data.gitlink}
+                  onClose={() => setShowPopup(null)}
+                  testimonials={
+                    data.testimonials ? (
+                      <AnimatedTestimonials
+                        testimonials={data.testimonials}
+                        autoplay
+                      />
+                    ) : null
+                  }
+                />
+              </AnimatePresence>
             );
           })()}
         </div>
@@ -284,9 +313,9 @@ export default function HomePage() {
             </h2>
           </div>
         </div>
-        <div className="flex flex-col w-full gap-28">
+        <div className="flex flex-col w-full gap-28 p-3">
           <div className="flex md:flex-row flex-col justify-start w-full bg-neutral-900 py-5 rounded-md">
-            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
+            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center p-2">
               <Card title="Développement" icon={<IconDeviceIpadHorizontalCode size={30} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
@@ -380,13 +409,13 @@ export default function HomePage() {
               <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
             </div>
             <div className="flex p-4">
-              <ol className="flex flex-col list-decimal w-full gap-6 justify-center font-mono text-yellow-50">
-                <li className="">Installation d'un serveur Web</li>
-                <li className="">Securiser un serveur web</li>
-                <li className="">Adressage IP (avec Cisco Packet tracer)</li>
-                <li className="">Realiser des machines virtuelles</li>
-                <li className="">Realisation d'une connection SSH entre machine virtuelle dans un réseau local</li>
-              </ol>
+              <ul className="flex flex-col justify-center w-full gap-6 font-mono text-yellow-50">
+                <li>1. Installation d'un serveur Web</li>
+                <li>2. Securiser un serveur web</li>
+                <li>3. Adressage IP (avec Cisco Packet tracer)</li>
+                <li>4. Realiser des machines virtuelles</li>
+                <li>5. Realisation d'une connection SSH entre machine virtuelle dans un réseau local</li>
+              </ul>
             </div>
           </div>
 
@@ -395,7 +424,7 @@ export default function HomePage() {
               <ol className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
                 <li className="flex items-center">{'>' + ' Anglais' + ' C1'}</li>
                 <li className="flex items-center">{'>' + ' Francais' + ' B1'}</li>
-                <li className="flex items-center">{'>' + ' Arab' + ' C1'}</li>
+                <li className="flex items-center">{'>' + ' Arabe' + ' Langue maternelle'}</li>
               </ol>
             </div>
             <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
@@ -432,11 +461,13 @@ export default function HomePage() {
                 <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
               </div>
             </div>
-            <div className="p-8 bg-neutral-800 flex flex-col justify-center items-start">
+            <div className="p-5 bg-neutral-800 flex flex-col justify-center items-start">
               <div className='flex flex-col text-start font-mono text-amber-50 gap-4'>
-                <h2 className="text-rose-400 font-retro "> 2024 - 2025  BTS Informatique Lycée Turgot (75003)</h2>
+                <h2 className="text-rose-500 text-xs font-retro "> 2025 - 2026 2eme année BTS Informatique Lycée Turgot (75003)</h2>
                 <p className="animate-pulse">{'>' + ' Option développement'}</p>
-                <h2 className="text-pink-400 font-retro "> 2020 - 2021 Bac general Lycée Jean Jaures (95100)</h2>
+                <h2 className="text-rose-400 text-xs font-retro "> 2024 - 2025 1er année BTS Informatique Lycée Turgot (75003)</h2>
+                <p className="animate-pulse">{'>' + ' Option développement'}</p>
+                <h2 className="text-pink-400 text-xs font-retro "> 2020 - 2021 Bac general Lycée Jean Jaures (95100)</h2>
                 <p className="animate-pulse">{'>' + ' Option: Science de l’ingénieure - Math (Mention Bien)'}</p>
               </div>
             </div>
@@ -460,23 +491,17 @@ export default function HomePage() {
               Projets
             </h2>
           </div>
-          <div className="w-full flex flex-col justify-center items-center m-10">
-            <div className="relative min-h-full md:min-h-screen flex flex-col justify-start items-center md:w-3/4 w-full px-0 md:px-5 bg-center bg-cover bg-no-repeat">
-              <div className="relative w-full h-full">
-                <img src="/pc.png" alt="" className="md:flex hidden w-full z-50" />
-                <img src="/mobile.png" alt="" className="flex md:hidden w-full z-50" />
-                <div className="absolute top-10 w-3/4 left-1/8 h-full md:h-1/2 max-h-none -z-10 overflow-hidden py-4 px-6">
-                  <Vortex>
-                  </Vortex>
-                </div>
-                <div className="absolute lg:top-12 md:top-[10%] top-[20%] lg:left-30 left-[30%] md:left-[25%] flex md:flex-row flex-col flex-wrap gap-4">
-                  <div className="flex flex-col items-center justify-center min-w-10 w-[20%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+          <div className="w-full flex flex-col justify-center items-center">
+            <div className="flex border-[15px] min-h-[400px] md:w-[52%] w-[80%] max-w-[700px] border-neutral-900 rounded-md mt-10">
+              <div className="flex flex-col justify-start min-h-[400px] w-full bg-radial from-indigo-300/30 to-neutral-900">
+                <div className="flex md:flex-row flex-col flex-wrap gap-4 p-4">
+                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
                     <img src="/webtoona.png" alt="" className="w-full"
                       onClick={() => setShowPopup("webtoona")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">Webtoona</p>
                   </div>
-                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
                     <img src="/jeu.png" alt="" className="w-full"
                       onClick={() => setShowPopup("jeu")}
                     />
@@ -491,6 +516,32 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+            <div className="relative w-[85%] h-40 max-w-[1155px] bg-neutral-900 border-4 border-neutral-800 trapezoid md:flex hidden">
+              <div className="absolute inset-0 flex flex-col gap-3 items-center justify-center text-white font-bold">
+                <div className='flex gap-1'>
+                  {['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((item) => (
+                    <div
+                      key={item}
+                      className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <div className='flex gap-3'>
+                  {['Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'].map((item) => (
+                    <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
+                  ))}
+                </div>
+                <div className='flex gap-5'>
+                  {['W', 'X', 'C', 'V', 'B', 'N', '?', ';', '/', '!'].map((item) => (
+                    <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="w-[85%] max-w-[1155px] h-10 bg-neutral-900 rounded-b-md md:flex hidden">
+            </div>
           </div>
         </div>
         <div className="w-full flex flex-col p-4">
@@ -500,18 +551,18 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="w-full flex lg:flex-row p-8 flex-col gap-4">
-            <div className="flex lg:w-1/2 w-full gap-5 p-4 flex-wrap border-2 hover:bg-yellow-500 hover:text-black border-yellow-500">
+            <div className="flex lg:w-1/2 w-full h-[27rem] gap-5 p-4 flex-wrap border-2 hover:bg-yellow-500 hover:text-black border-yellow-500">
               <div className="aspect-square w-30">
                 <img src="/cisco.png" alt="cisco" />
               </div>
               <div className="flex flex-col gap-6">
-                <div className="p-5 font-retro text-white text-left">
+                <div className="p-5 font-retro text-md text-white text-left">
                   <p>Certificats Packet Tracer</p>
                 </div>
-                <div className="p-5 font-retro text-white text-left">
+                <div className="p-5 font-retro text-md text-white text-left">
                   <p>Certificats Networking Basics</p>
                 </div>
-                <div className="p-5 font-retro text-white text-left">
+                <div className="p-5 font-retro text-md text-white text-left">
                   <p>Certificats CSS Essentials</p>
                 </div>
               </div>
@@ -520,20 +571,23 @@ export default function HomePage() {
               <div className="aspect-square w-30">
                 <img src="/google.png" alt="cisco" />
               </div>
-              <div className="p-5 font-retro text-white text-left">
+              <div className="p-5 font-retro text-md text-white text-left">
                 <p className="">Certificats Google Analytics</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="w-full flex flex-col p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-orange-400/30 transition-all rounded-md border-orange-500">
-            <h2 className="text-orange-500 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-orange-400 font-retro p-2 items-center animate-pulse">
               Veille Technologique
             </h2>
           </div>
+          <div className="w-full flex justify-center items-center">
+            <h3 className="text-blue-500 font-retro pt-8 items-center">Les frameworks et la performance sur le web</h3>
+          </div>
           <div>
-            <div className="flex justify-between w-[80%] mx-auto rounded-md overflow-hidden my-14">
+            <div className="flex justify-between w-[80%] mx-auto rounded-md overflow-hidden my-8">
               <div className="w-full rounded-lg overflow-hidden">
                 <div className="p-4 bg-neutral-900 w-full h-6 flex items-center">
                   <div className="w-full flex gap-1 justify-end items-center">
