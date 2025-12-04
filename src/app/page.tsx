@@ -16,7 +16,77 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Grid } from "@/components/ui/grid-glow";
 import { Press_Start_2P } from "next/font/google";
+import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
+import GooeyNav from "@/components/GooeyNav";
 
+const articles = [
+  {
+    area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
+    icon: <Box className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://www.researchgate.net/publication/385737356_BENCHMARKING_FRONT-END_FRAMEWORKS_A_DEEP_DIVE_INTO_THE_PERFORMANCE_AND_SCALABILITY_OF_REACT_ANGULAR_AND_VUEJS",
+    title: "Benchmarking Front-end Frameworks",
+    description: "Un approfondissement sur la performance et la scalabilité des language tel que React, Angular, VueJS...",
+  },
+  {
+    area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
+    icon: <Settings className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://smile.eu/en/publications-and-events/what-frontend-framework-fastest",
+    title: "What frontend framework is the fastest?",
+    description:
+      "Comparatif de performance pour divers frameworks front-end (CSR / SSR) : React, Vue, Solid, Angular, Astro, Qwik, Remix...",
+  },
+  {
+    area: "md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]",
+    icon: <Lock className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://dev.to/tuananhpham/popular-backend-frameworks-performance-benchmark-1bkh",
+    title: "Best popular backend frameworks by performance of …",
+    description: "les meilleurs frameworks backend de 2025",
+  },
+  {
+    area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
+    icon: <Sparkles className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://www.analy.fr/blog/nextjs-en-2025-pourquoi-ce-framework-simpose-pour-les-sites-performants",
+    title: "Next Js framework le plus performant ",
+    description: "NextJs reste leader grâce à sa vitesse, son rendu côté serveur (SSR) et son bon référencement (SEO)...",
+  }
+];
+
+const articles2 = [
+  {
+    area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
+    icon: <Box className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://laconsole.dev/blog/top-frameworks-developpement",
+    title: "Les 30 frameworks à apprendre en 2025",
+    description: "Les choix d'un framewoek est moins déterminant que le choix de langague, car une fois un language maitrisé, de nombreux frameworks sont accessibles...",
+  },
+  {
+    area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
+    icon: <Settings className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://dev.to/this-is-learning/javascript-frameworks-heading-into-2025-hkb",
+    title: "Javascript Frameworks Heading into 2025",
+    description: "Panorama des nouveaux meta-frameworks “server-first” (Svelte Kit, Astro, Remix, Qwik, SolidStart, etc.) et des évolutions majeures dans l’écosystème...",
+  },
+  {
+    area: "md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]",
+    icon: <Lock className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://itnext.io/benchmarking-frontends-in-2025-f6bbf43b7721",
+    title: "Benchmarking Frontends in 2025 — Stop Measuring Page Loads. Start Measuring Resilience",
+    description: " Propose de repenser les métriques de performance pour aller au-delà du simple chargement vers la résilience (rendre l’app robuste aux interruptions, aux conditions réseau instables...",
+  },
+  {
+    area: "md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]",
+    icon: <Sparkles className="h-4 w-4 text-white dark:text-neutral-400" />,
+    link: "https://strapi.io/blog/frameworks-for-javascript-app-developlemt",
+    title: "Top Frameworks for JavaScript App Development in 2025",
+    description: "Tendances des frameworks JS en 2025 : domination de React, montée en puissance de frameworks orientés performance (Svelte, Solid), importance de la SSR & de l’edge computing...",
+  }
+];
+
+const navItems = [
+  { label: "Home", href: "#" },
+  { label: "About", href: "#" },
+  { label: "Contact", href: "#" },
+];
 
 type Testimonial = { name: string; src: string };
 type ProjectKey = "webtoona" | "jeu" | "mode";
@@ -36,7 +106,6 @@ const press = Press_Start_2P({
   fallback: ['sans-serif']
 });
 
-
 export default function HomePage() {
 
   const intro = ["Je", "me", "présente!", "Je", "suis", "étudiante", "en", "BTS", "Services", "Informatiques",
@@ -45,17 +114,56 @@ export default function HomePage() {
     "acquises", "au", "cours", "de", "ma", "formation", "en", "réalisations", "concrètes", "et", "structurées,",
     "illustrant", "ma", "passion", "pour", "l'informatique", "et", "mon", "envie", "constante", "d'apprendre", "et", "d'évoluer.", "Bienvenue", "et", "bonne", "découverte", "de", "mon", "portfolio."];
   const veille = [
-    "Pour", "rester", "informé", "des", "nouveautés", "dans", "le", "domaine", "du", "développement,",
-    "j’ai", "utilisé", "l’extension", "daily.dev", "sur", "mon", "navigateur,",
-    "qui", "regroupe", "des", "articles", "récents", "sur", "les", "technologies", "web.",
-    "J’ai", "également", "complété", "ma", "veille", "via", "YouTube", "(tutoriels,", "conférences)",
-    "et", "les", "réseaux", "sociaux", "comme", "LinkedIn", "et", "X,",
-    "où", "les", "professionnels", "partagent", "actualités,", "astuces", "et", "tendances.",
-    "Ci-dessous,", "vous", "trouverez", "une", "sélection", "des", "contenus", "les", "plus", "intéressants",
-    "que", "j’ai", "sauvegardés."
+    "Cette", "veille", "porte", "sur", "l’impact", "du", "choix", "d’un", "framework",
+    "sur", "la", "performance", "d’une", "application", "web.",
+    "Dans", "un", "contexte", "où", "la", "vitesse", "de", "chargement",
+    "détermine", "le", "succès", "d’un", "site,", "la", "performance",
+    "est", "devenue", "un", "enjeu", "majeur.",
+    "L’objectif", "est", "de", "comprendre", "comment", "les", "frameworks",
+    "influencent", "la", "rapidité,", "la", "fluidité", "et", "la", "scalabilité,",
+    "et", "d’identifier", "quels", "outils", "sont", "les", "plus", "adaptés",
+    "selon", "les", "besoins", "réels", "d’un", "projet", "en", "2025."
   ];
 
   const skills = ['C', 'HTML', 'CSS', 'python', 'php', 'SQL', 'GIT/GITHub', 'JavaScript', 'React', 'Next.js', 'Node.js', 'Express.js', 'TypeScript', 'Tailwind'];
+  const section = [
+    {
+      title: 'Acceuil',
+      color: 'red-600' 
+    },
+    {
+      title: 'A propos',
+      color: 'green-500'
+    },
+    {
+      title: 'Compétences',
+      color: 'blue-500'
+    },
+    {
+      title: 'Parcours',
+      color: 'amber-500'
+    },
+    {
+      title: 'Expérience',
+      color: 'orange-500'
+    },
+    {
+      title: 'Projets',
+      color: 'pink-600'
+    },
+    {
+      title: 'Certificats',
+      color: 'cyan-500'
+    },
+    {
+      title: 'Veille',
+      color: 'rose-500'
+    },
+    {
+      title: 'Contact',
+      color: 'indigo-600'
+    }
+  ];
   const aboutRef = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [showPopup, setShowPopup] = useState<ProjectKey | null>(null);
@@ -212,6 +320,7 @@ export default function HomePage() {
             const data = popupContent[showPopup];          // ProjectData garanti
 
             return (
+
               <AnimatePresence>
                 <Popup
                   title={data.title}
@@ -234,7 +343,28 @@ export default function HomePage() {
           })()}
         </div>
       )}
-
+      <nav className="flex flex-row fixed top-1 left-1 right-1 z-50 gap-2 p-2 bg-black/60 backdrop-blur-xs border-2 border-black shadow-2xl rounded-lg">
+        <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-row items-center justify-center">
+            <img src="/avatar.png" alt="" className="w-10 h-10 p-1" /> <p className="text-amber-300/80 font-retro px-2 text-xs">MK</p>
+          </div>
+          <div className="flex flex-row gap-2 self-center">
+            <AnimatePresence>
+              {section.map((word: { title: string, color: string }, index: number) => (
+                <motion.div
+                  initial={{ x: -5 * index, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, type: "spring", stiffness: 260, damping: 20 }}
+                  key={index} className="flex items-center">
+                    <div className={`inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-${word.color} px-3 py-3 text-[9px] font-retro text-white backdrop-blur-3xl hover:transform hover:scale-110 duration-200 hover:bg-indigo-900`}>
+                      {word.title}
+                    </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+      </nav>
       <div>
         <div className="relative justify-center items-center w-full h-screen bg-[url(/bg.png)] bg-center bg-cover bg-no-repeat bg-fixed">
           <div className="flex gap-10 flex-col w-full h-full justify-center items-center">
@@ -316,7 +446,7 @@ export default function HomePage() {
         <div className="flex flex-col w-full gap-28 p-3">
           <div className="flex md:flex-row flex-col justify-start w-full bg-neutral-900 py-5 rounded-md">
             <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center p-2">
-              <Card title="Développement" icon={<IconDeviceIpadHorizontalCode size={30} className="text-white overflow-y-auto" />}>
+              <Card title="Développement" icon={<IconDeviceIpadHorizontalCode size={50} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
                   containerClassName="bg-emerald-900 shadow-2xl shadow-emerald-200/70"
@@ -371,7 +501,7 @@ export default function HomePage() {
               </ul>
             </div>
             <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
-              <Card title="Système" icon={<IconDevicesPc size={30} className="text-white overflow-y-auto" />}>
+              <Card title="Système" icon={<IconDevicesPc size={50} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
                   containerClassName="bg-sky-900 shadow-2xl shadow-sky-300/70"
@@ -391,7 +521,7 @@ export default function HomePage() {
 
           <div className="flex md:flex-row flex-col justify-start w-full py-5 bg-neutral-900">
             <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
-              <Card title="Réseau" icon={<IconAntenna size={30} className="text-white overflow-y-auto" />}>
+              <Card title="Réseau" icon={<IconAntenna size={50} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
                   containerClassName="bg-purple-900 shadow-2xl shadow-indigo-300/70"
@@ -428,7 +558,7 @@ export default function HomePage() {
               </ol>
             </div>
             <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
-              <Card title="Langues" icon={<IconLanguage size={30} className="text-white overflow-y-auto" />}>
+              <Card title="Langues" icon={<IconLanguage size={50} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
                   containerClassName="bg-yellow-600 shadow-2xl shadow-yellow-200/70"
@@ -450,7 +580,7 @@ export default function HomePage() {
         <div className="w-full flex flex-col p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-pink-400/30 transition-all rounded-md border-pink-500">
             <h2 className="text-pink-300 font-retro p-2 items-center animate-pulse">
-              Education
+              Parcours
             </h2>
           </div>
           <div className="flex flex-col md:w-[80%] w-full mx-auto rounded-md overflow-hidden my-14">
@@ -517,26 +647,28 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative w-[85%] h-40 max-w-[1155px] bg-neutral-900 border-4 border-neutral-800 trapezoid md:flex hidden">
-              <div className="absolute inset-0 flex flex-col gap-3 items-center justify-center text-white font-bold">
-                <div className='flex gap-1'>
-                  {['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((item) => (
-                    <div
-                      key={item}
-                      className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-                <div className='flex gap-3'>
-                  {['Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'].map((item) => (
-                    <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
-                  ))}
-                </div>
-                <div className='flex gap-5'>
-                  {['W', 'X', 'C', 'V', 'B', 'N', '?', ';', '/', '!'].map((item) => (
-                    <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
-                  ))}
+              <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-30 max-w-[1155px] justify-center items-center bg-neutral-950 trapezoid md:flex hidden'>
+                <div className="absolute inset-0 flex flex-col gap-3 items-center justify-center text-white font-bold">
+                  <div className='flex gap-1'>
+                    {['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((item) => (
+                      <div
+                        key={item}
+                        className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all"
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                  <div className='flex gap-3'>
+                    {['Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'].map((item) => (
+                      <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
+                    ))}
+                  </div>
+                  <div className='flex gap-5'>
+                    {['W', 'X', 'C', 'V', 'B', 'N', '?', ';', '/', '!'].map((item) => (
+                      <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -583,9 +715,6 @@ export default function HomePage() {
               Veille Technologique
             </h2>
           </div>
-          <div className="w-full flex justify-center items-center">
-            <h3 className="text-blue-500 font-retro pt-8 items-center">Les frameworks et la performance sur le web</h3>
-          </div>
           <div>
             <div className="flex justify-between w-[80%] mx-auto rounded-md overflow-hidden my-8">
               <div className="w-full rounded-lg overflow-hidden">
@@ -597,6 +726,9 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="p-4 bg-neutral-800 flex flex-col justify-center items-center border-b-radius-lg overflow-hidden">
+                  <div className="w-full flex justify-center items-center">
+                    <h3 className="text-indigo-500 font-retro p-2 items-center">Les frameworks et la performance sur le web</h3>
+                  </div>
                   <TypewriterEffect words={veille.map((word: string) => {
                     return { text: word }
                   })} />
@@ -605,8 +737,23 @@ export default function HomePage() {
             </div>
           </div>
           <div>
+            <div className="flex flex-col w-full transition-all rounded-md">
+              <h2 className="text-rose-400 text-xs font-retro pl-6 p-4 text-center">
+                Performance web et méthodologie d’évaluation
+              </h2>
+            </div>
             <div className="bg-black p-5">
-              <Grid />
+              <Grid items={articles} />
+            </div>
+          </div>
+          <div>
+            <div className="flex w-full flex-col transition-all rounded-md">
+              <h2 className="text-blue-400 text-xs font-retro pl-6 p-4 text-center">
+                Choix et tendances des frameworks (2025)
+              </h2>
+            </div>
+            <div className="bg-black p-5">
+              <Grid items={articles2} />
             </div>
           </div>
         </div>
