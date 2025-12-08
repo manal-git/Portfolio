@@ -374,12 +374,13 @@ export default function HomePage() {
       <nav className="flex flex-row fixed top-1 left-1 backdrop-blur-sm right-1 z-50 gap-2 p-2 bg-neutral-900/10  border border-slate-800 shadow-2xl rounded-lg">
         <div className="flex flex-row w-full justify-between">
           <div className="flex flex-row items-center justify-center">
-            <img src="/avatar.png" alt="" className="w-10 h-10 p-1" /> <p className="text-amber-300/80 font-retro px-2 text-xs">MK</p>
+            <img src="/avatar.png" alt="" className="w-10 h-10 p-1" />
+            <p className="text-amber-300/80 font-retro px-2 text-xs">MK</p>
           </div>
           <div>
             <IconMenu2 className="w-6 h-6 text-amber-300/80 cursor-pointer md:hidden" />
           </div>
-          <div className="md:flex hidden w-full flex-row gap-2 self-center">
+          <div className="md:flex hidden w-full flex-row gap-2 justify-end">
             <AnimatePresence>
               {section.map((word: { title: string, color: string, href: string }, index: number) => (
                 <motion.div
@@ -460,7 +461,7 @@ export default function HomePage() {
               </button>
             </div>
           </div>
-          <div className="absolute -bottom-1 md:bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent" id="a-propos">
+          <div className="absolute -bottom-1 md:bottom-0 left-0 w-full h-10 bg-gradient-to-t from-black to-transparent" id="a-propos">
           </div>
         </div>
         <div ref={aboutRef} className="flex md:flex-row flex-col justify-between w-[80%] mx-auto rounded-md overflow-hidden my-1 md:my-14">
