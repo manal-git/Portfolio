@@ -28,7 +28,7 @@ const Card = ({
             <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
             <Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
             <AnimatePresence>
-                {hovered && (
+                {(
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -43,7 +43,7 @@ const Card = ({
                 <div className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:opacity-0 transition duration-200 w-full  mx-auto flex items-center justify-center">
                     {icon}
                 </div>
-                <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black font-retro group-hover/canvas-card:text-slate-300/80 group-hover/canvas-card:-translate-y-2 transition text-center items-center duration-200">
+                <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black font-retro group-hover/canvas-card:text-slate-300/80 group-hover/canvas-card:-translate-y-8 transition text-center items-center duration-200">
                     {title}
                 </h2>
             </div>

@@ -3,7 +3,7 @@
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import Card from "@/components/ui/card";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandUbuntu, IconBrandWindows, IconDeviceIpadHorizontalCode, IconDevicesPc, IconLanguage } from '@tabler/icons-react';
+import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandUbuntu, IconBrandWindows, IconDeviceIpadHorizontalCode, IconDevicesPc, IconLanguage, IconMenu2 } from '@tabler/icons-react';
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinux } from '@fortawesome/free-brands-svg-icons'
@@ -17,7 +17,12 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Grid } from "@/components/ui/grid-glow";
 import { Press_Start_2P } from "next/font/google";
 import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
-import GooeyNav from "@/components/GooeyNav";
+import { GridScan } from "@/components/GridScan";
+import RippleGrid from "@/components/RippleGrid";
+import { Form, Formik, FormikProvider, useFormik } from "formik";
+import { sendEmail } from "@/utils/emailUtils";
+import * as Yup from "yup";
+
 
 const articles = [
   {
@@ -129,39 +134,48 @@ export default function HomePage() {
   const section = [
     {
       title: 'Acceuil',
-      color: 'red-600' 
+      color: 'hover:bg-red-600',
+      href: '#acceuil'
     },
     {
       title: 'A propos',
-      color: 'green-500'
+      color: 'hover:bg-green-600',
+      href: '#a-propos'
     },
     {
       title: 'Compétences',
-      color: 'blue-500'
+      color: 'hover:bg-blue-600',
+      href: '#competences'
     },
     {
       title: 'Parcours',
-      color: 'amber-500'
+      color: 'hover:bg-amber-600',
+      href: '#parcours'
     },
     {
       title: 'Expérience',
-      color: 'orange-500'
+      color: 'hover:bg-orange-600',
+      href: '#experience'
     },
     {
       title: 'Projets',
-      color: 'pink-600'
+      color: 'hover:bg-pink-600',
+      href: '#projets'
     },
     {
       title: 'Certificats',
-      color: 'cyan-500'
+      color: 'hover:bg-cyan-600',
+      href: '#certificats'
     },
     {
       title: 'Veille',
-      color: 'rose-500'
+      color: 'hover:bg-rose-600',
+      href: '#veille'
     },
     {
       title: 'Contact',
-      color: 'indigo-600'
+      color: 'hover:bg-indigo-600',
+      href: '#contact'
     }
   ];
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -172,28 +186,7 @@ export default function HomePage() {
   const content = [
     {
       title: "Professionnelle",
-      subtitle: "Stage de 2 mois chez Turnadon du 18 mai au 4 juillet - Paris (2025)",
-      description: [
-        "Développement front-end avec React, Tailwind CSS et Redux Toolkit (pages, thèmes, responsive design).",
-        "Développement back-end avec Node.js et Express (API REST, base de données, routes).",
-        "Intégration d’un système d’upload de médias via AWS S3.",
-        "Utilisation de Git, GitHub et Postman pour la gestion de projet et les tests.",
-        "Renforcement des compétences en développement full-stack, gestion d’état, design réactif et intégration cloud.",
-      ],
-      content: (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-          <img src="/stage.png" alt="" className="p-4" />
-        </motion.div>
-      ),
-
-
-    },
-    {
-      subtitle: "Stage de 2 mois chez Turnadon du 1 decembre au 23 janvier - Paris (2025)",
+      subtitle: "Stage chez Turnadon du 18 mai au 4 juillet et du 01 decembre au 23 janvier - Paris (2025)",
       description: [
         "Développement front-end avec React, Tailwind CSS et Redux Toolkit (pages, thèmes, responsive design).",
         "Développement back-end avec Node.js et Express (API REST, base de données, routes).",
@@ -309,6 +302,41 @@ export default function HomePage() {
     },
   };
 
+  const formikValidationSchema = Yup.object({
+    email: Yup.string().email("Email invalide").required("Email requis"),
+    name: Yup.string().required("Nom requis"),
+    message: Yup.string().required("Message requis"),
+  })
+
+  const formikInitialValues = {
+    email: "",
+    name: "",
+    message: "",
+  }
+
+  const formik = useFormik({
+    validationSchema: formikValidationSchema,
+    initialValues: formikInitialValues,
+    onSubmit: async (values) => {
+      const res = await sendEmail({
+        from: values.email,
+        to: "khalqallahmanal@gmail.com",
+        subject: `Nouveau message de ${values.name}`,
+        html: `<p>${values.message}</p>`,
+      });
+      console.log("🚀 ~ HomePage ~ res:", res)
+    },
+  });
+
+  const handleScroll = (id: string) => {
+    const element = document.querySelector(id);
+    if (element) {
+      const offset = 80;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }
+
   return (
     <>
       {showPopup && (
@@ -343,22 +371,29 @@ export default function HomePage() {
           })()}
         </div>
       )}
-      <nav className="flex flex-row fixed top-1 left-1 right-1 z-50 gap-2 p-2 bg-black/60 backdrop-blur-xs border-2 border-black shadow-2xl rounded-lg">
+      <nav className="flex flex-row fixed top-1 left-1 backdrop-blur-sm right-1 z-50 gap-2 p-2 bg-neutral-900/10  border border-slate-800 shadow-2xl rounded-lg">
         <div className="flex flex-row w-full justify-between">
           <div className="flex flex-row items-center justify-center">
             <img src="/avatar.png" alt="" className="w-10 h-10 p-1" /> <p className="text-amber-300/80 font-retro px-2 text-xs">MK</p>
           </div>
-          <div className="flex flex-row gap-2 self-center">
+          <div>
+            <IconMenu2 className="w-6 h-6 text-amber-300/80 cursor-pointer md:hidden" />
+          </div>
+          <div className="md:flex hidden w-full flex-row gap-2 self-center">
             <AnimatePresence>
-              {section.map((word: { title: string, color: string }, index: number) => (
+              {section.map((word: { title: string, color: string, href: string }, index: number) => (
                 <motion.div
                   initial={{ x: -5 * index, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, type: "spring", stiffness: 260, damping: 20 }}
-                  key={index} className="flex items-center">
-                    <div className={`inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-${word.color} px-3 py-3 text-[9px] font-retro text-white backdrop-blur-3xl hover:transform hover:scale-110 duration-200 hover:bg-indigo-900`}>
-                      {word.title}
-                    </div>
+                  key={index} className="flex items-center"
+                  onClick={() => {
+                    handleScroll(word.href)
+                  }}
+                >
+                  <div className={`inline-flex h-full w-full cursor-pointer items-center justify-center border border-slate-800 rounded-full ${word.color} px-3 py-3 text-[9px] font-retro text-white backdrop-blur-3xl shadow-rose-300/30 shadow-md hover:transform hover:scale-110 duration-200`}>
+                    <a>{word.title}</a>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -366,8 +401,20 @@ export default function HomePage() {
         </div>
       </nav>
       <div>
-        <div className="relative justify-center items-center w-full h-screen bg-[url(/bg.png)] bg-center bg-cover bg-no-repeat bg-fixed">
-          <div className="flex gap-10 flex-col w-full h-full justify-center items-center">
+        <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+          <GridScan
+            sensitivity={0.55}
+            lineThickness={1}
+            linesColor="#392e4e"
+            gridScale={0.1}
+            scanColor="#FFAEDE"
+            scanOpacity={0.4}
+            enablePost
+            bloomIntensity={1}
+            chromaticAberration={0.002}
+            noiseIntensity={0.01}
+          />
+          <div className="absolute top-1 left-1/2 transform -translate-x-1/2 flex gap-2 flex-col w-fit h-full justify-center items-center" id="acceuil">
             <motion.div
               animate={{
                 y: [0, -20, 0],
@@ -379,7 +426,7 @@ export default function HomePage() {
                 repeatType: 'loop',
                 repeatDelay: 0,
               }}
-              className="w-1/2 m-5 drop-shadow-xl drop-shadow-pink-500/60">
+              className="md:w-3/4 w-[80%] m-5 drop-shadow-xl drop-shadow-pink-500/60">
               <img src="/title.png" alt="" />
             </motion.div>
             <div className="relative w-full flex flex-col justify-center items-center">
@@ -408,12 +455,13 @@ export default function HomePage() {
                     setStarted(false);
                   }, 600);
                 }}
-                className={`text-yellow-300 py-2 px-4 rounded-2xl cursor-pointer hover:animate-none animate-pulse transition duration-300 ${press.className}`}>
+                className={`text-yellow-300 py-6 px-4 md:text-lg text-xs rounded-2xl cursor-pointer hover:animate-none animate-pulse transition duration-300 ${press.className}`}>
                 PRESS TO START
               </button>
             </div>
           </div>
-          <div className="absolute -bottom-1 md:bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent"></div>
+          <div className="absolute -bottom-1 md:bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent" id="a-propos">
+          </div>
         </div>
         <div ref={aboutRef} className="flex md:flex-row flex-col justify-between w-[80%] mx-auto rounded-md overflow-hidden my-1 md:my-14">
           <div className="h-full">
@@ -436,9 +484,9 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full flex p-3">
+        <div className="w-full flex p-3" id="competences">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-yellow-400/30 transition-all rounded-md border-amber-500">
-            <h2 className="text-yellow-200 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-yellow-200 font-retro p-2 items-center animate-pulse" >
               Compétences
             </h2>
           </div>
@@ -579,7 +627,7 @@ export default function HomePage() {
         </div>
         <div className="w-full flex flex-col p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-pink-400/30 transition-all rounded-md border-pink-500">
-            <h2 className="text-pink-300 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-pink-300 font-retro p-2 items-center animate-pulse" id="parcours">
               Parcours
             </h2>
           </div>
@@ -605,7 +653,7 @@ export default function HomePage() {
         </div>
         <div className="p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-cyan-500/30 transition-all rounded-md border-cyan-500">
-            <h2 className="text-blue-300 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-blue-300 font-retro p-2 items-center animate-pulse" id="experience">
               Experiences
             </h2>
           </div>
@@ -617,7 +665,7 @@ export default function HomePage() {
         </div>
         <div className="w-full flex flex-col justify-center items-center p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-indigo-400/30 transition-all rounded-md border-purple-500">
-            <h2 className="text-purple-400 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-purple-400 font-retro p-2 items-center animate-pulse" id="projets">
               Projets
             </h2>
           </div>
@@ -678,23 +726,23 @@ export default function HomePage() {
         </div>
         <div className="w-full flex flex-col p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-green-400/30 transition-all rounded-md border-green-500">
-            <h2 className="text-emerald-400 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-emerald-400 font-retro p-2 items-center animate-pulse" id="certificats">
               Certificats
             </h2>
           </div>
           <div className="w-full flex lg:flex-row p-8 flex-col gap-4">
-            <div className="flex lg:w-1/2 w-full h-[27rem] gap-5 p-4 flex-wrap border-2 hover:bg-yellow-500 hover:text-black border-yellow-500">
+            <div className="flex lg:w-1/2 w-full h-auto gap-5 p-4 flex-wrap border-2 hover:bg-yellow-500 hover:text-black border-yellow-500">
               <div className="aspect-square w-30">
                 <img src="/cisco.png" alt="cisco" />
               </div>
-              <div className="flex flex-col gap-6">
-                <div className="p-5 font-retro text-md text-white text-left">
+              <div className="flex flex-col gap-6 p-2">
+                <div className="p-2 font-retro md:text-md text-xs text-white text-left">
                   <p>Certificats Packet Tracer</p>
                 </div>
-                <div className="p-5 font-retro text-md text-white text-left">
+                <div className="p-2 font-retro md:text-md text-xs text-white text-left">
                   <p>Certificats Networking Basics</p>
                 </div>
-                <div className="p-5 font-retro text-md text-white text-left">
+                <div className="p-2 font-retro md:text-md text-xs text-white text-left">
                   <p>Certificats CSS Essentials</p>
                 </div>
               </div>
@@ -703,7 +751,7 @@ export default function HomePage() {
               <div className="aspect-square w-30">
                 <img src="/google.png" alt="cisco" />
               </div>
-              <div className="p-5 font-retro text-md text-white text-left">
+              <div className="p-5 font-retro md:text-md text-xs text-white text-left">
                 <p className="">Certificats Google Analytics</p>
               </div>
             </div>
@@ -711,7 +759,7 @@ export default function HomePage() {
         </div>
         <div className="w-full flex flex-col p-4">
           <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-orange-400/30 transition-all rounded-md border-orange-500">
-            <h2 className="text-orange-400 font-retro p-2 items-center animate-pulse">
+            <h2 className="text-orange-400 font-retro p-2 items-center animate-pulse" id="veille">
               Veille Technologique
             </h2>
           </div>
@@ -754,6 +802,80 @@ export default function HomePage() {
             </div>
             <div className="bg-black p-5">
               <Grid items={articles2} />
+            </div>
+          </div>
+        </div>
+        <div className="w-full flex flex-col p-4" >
+          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-rose-400/30 transition-all rounded-md border-rose-500">
+            <h2 className="text-rose-400 font-retro p-2 items-center animate-pulse" id="contact">
+              Contact
+            </h2>
+          </div>
+          <div style={{ position: 'relative', height: '500px', overflow: 'hidden' }}>
+            <RippleGrid
+              enableRainbow={false}
+              gridColor="#ff006a"
+              rippleIntensity={0.1}
+              gridSize={10}
+              gridThickness={10}
+              mouseInteraction={true}
+              mouseInteractionRadius={1.2}
+              opacity={2}
+            />
+            <div className="absolute top-1 flex justify-between items-center w-full h-full p-6 gap-4">
+              <div className="w-1/2 flex flex-col">
+                <motion.div
+                  animate={{ y: [0, -30, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-full">
+                  <img
+                    src="/plane.png"
+                    alt="plane"
+                  />
+                </motion.div>
+              </div>
+              <div className="w-1/2 h-full bg-slate-500/10 backdrop-blur-xs border border-white/20 rounded-2xl">
+                <div>
+                  <div>
+                    <FormikProvider value={formik}>
+                      <Form className="flex flex-col gap-4 p-4">
+                        <div className="flex flex-col gap-2 p-2">
+                          <label htmlFor="name" className="text-white font-retro text-xs">Nom</label>
+                          <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            className="text-white"
+                            value={formik.values.name}
+                            onChange={(e: any) => formik.setFieldValue("name", e.target.value)} />
+                        </div>
+                        <div className="flex flex-col gap-2 p-2">
+                          <label htmlFor="email" className="text-white font-retro text-xs">Email</label>
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            className="text-white"
+                            value={formik.values.email}
+                            onChange={(e: any) => formik.setFieldValue("email", e.target.value)} />
+                        </div>
+                        <div className="flex flex-col gap-2 p-2">
+                          <label htmlFor="message" className="text-white font-retro text-xs">Message</label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            className="text-white"
+                            value={formik.values.message}
+                            onChange={(e: any) => formik.setFieldValue("message", e.target.value)} />
+                        </div>
+                        <div className="flex flex-col gap-2 p-2">
+                          <button type="submit" className="bg-slate-500/40 text-white text-xs font-retro p-2 rounded-xs self-center">Envoyer</button>
+                        </div>
+                      </Form>
+                    </FormikProvider>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

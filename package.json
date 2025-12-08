@@ -18,16 +18,22 @@
     "@tabler/icons-react": "^3.34.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "face-api.js": "^0.22.2",
+    "formik": "^2.4.9",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.516.0",
     "motion": "^12.23.25",
     "next": "15.3.3",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.38.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-element-to-jsx-string": "^17.0.1",
+    "resend": "^6.5.2",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.4.0",
-    "three": "^0.177.0"
+    "three": "^0.167.1",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.10",
