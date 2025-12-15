@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import Card from "@/components/ui/card";
@@ -186,11 +186,16 @@ export default function HomePage() {
   const [showPopup, setShowPopup] = useState<ProjectKey | null>(null);
   const [sendEmailStatus, setSendEmailStatus] = useState<"success" | "error" | null>(null);
 
-  useEffect(() => {
-    if (window.innerWidth <= 768) {
-      setIsMobile(true);
-    }
-  }, [window.innerWidth]);
+useEffect(() => {
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+  
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+  
+  return () => window.removeEventListener('resize', checkMobile);
+}, []); 
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const content = [
