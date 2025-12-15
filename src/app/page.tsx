@@ -3,7 +3,7 @@
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import Card from "@/components/ui/card";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandUbuntu, IconBrandWindows, IconDeviceIpadHorizontalCode, IconDevicesPc, IconLanguage, IconMenu2 } from '@tabler/icons-react';
+import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandLinkedinFilled, IconBrandUbuntu, IconBrandWindows, IconCheck, IconDeviceIpadHorizontalCode, IconDevicesPc, IconFileCv, IconLanguage, IconMenu2, IconX } from '@tabler/icons-react';
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinux } from '@fortawesome/free-brands-svg-icons'
@@ -17,11 +17,12 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Grid } from "@/components/ui/grid-glow";
 import { Press_Start_2P } from "next/font/google";
 import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
-import { GridScan } from "@/components/GridScan";
-import RippleGrid from "@/components/RippleGrid";
 import { Form, Formik, FormikProvider, useFormik } from "formik";
-import { sendEmail } from "@/utils/emailUtils";
 import * as Yup from "yup";
+import { GridScan } from "@/components/ui/GridScan";
+import RippleGrid from "@/components/ui/RippleGrid";
+import DarkVeil from "@/components/ui/DarkVeil";
+import { sendEmail } from "@/utils/emailUtils";
 
 
 const articles = [
@@ -180,8 +181,17 @@ export default function HomePage() {
   ];
   const aboutRef = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [showPopup, setShowPopup] = useState<ProjectKey | null>(null);
-  // const [showPopup, setShowPopup] = useState<"jeu" | "webtoona" | "mode" | null>(null);
+  const [sendEmailStatus, setSendEmailStatus] = useState<"success" | "error" | null>(null);
+
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setIsMobile(true);
+    }
+  }, [window.innerWidth]);
+
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const content = [
     {
@@ -319,12 +329,20 @@ export default function HomePage() {
     initialValues: formikInitialValues,
     onSubmit: async (values) => {
       const res = await sendEmail({
-        from: values.email,
-        to: "khalqallahmanal@gmail.com",
-        subject: `Nouveau message de ${values.name}`,
-        html: `<p>${values.message}</p>`,
+        nom: values.name,
+        email: values.email,
+        time: new Date().toLocaleString(),
+        message: values.message,
       });
-      console.log("🚀 ~ HomePage ~ res:", res)
+      if (res === 'success') {
+        formik.resetForm();
+        setSendEmailStatus('success');
+      } else if (res === 'error') {
+        setSendEmailStatus('error');
+      }
+      setTimeout(() => {
+        setSendEmailStatus(null);
+      }, 6000);
     },
   });
 
@@ -345,7 +363,7 @@ export default function HomePage() {
           onClick={() => setShowPopup(null)}
         >
           {(() => {
-            const data = popupContent[showPopup];          // ProjectData garanti
+            const data = popupContent[showPopup];
 
             return (
 
@@ -372,15 +390,23 @@ export default function HomePage() {
         </div>
       )}
       <nav className="flex flex-row fixed top-1 left-1 backdrop-blur-sm right-1 z-50 gap-2 p-2 bg-neutral-900/10  border border-slate-800 shadow-2xl rounded-lg">
-        <div className="flex flex-row w-full justify-between">
+        <div className="flex flex-row w-full justify-between items-center">
           <div className="flex flex-row items-center justify-center">
             <img src="/avatar.png" alt="" className="w-10 h-10 p-1" />
             <p className="text-amber-300/80 font-retro px-2 text-xs">MK</p>
           </div>
-          <div>
-            <IconMenu2 className="w-6 h-6 text-amber-300/80 cursor-pointer md:hidden" />
+          <div
+            className="cursor-pointer active:scale-120 transition-all duration-100 md:hidden"
+            onClick={() => {
+              setShowMenu(!showMenu);
+            }}
+          > {showMenu && isMobile ?
+            <IconX className="w-6 h-6 text-amber-300/80 transition-all duration-200" />
+            :
+            <IconMenu2 className="w-6 h-6 text-amber-300/80 transition-all duration-200" />
+            }
           </div>
-          <div className="md:flex hidden w-full flex-row gap-2 justify-end">
+          <div className={`w-full gap-2 md:justify-end justify-center ${showMenu && isMobile ? "fixed top-15 left-0 right-0 flex flex-col items-end" : "hidden md:flex flex-row"}`}>
             <AnimatePresence>
               {section.map((word: { title: string, color: string, href: string }, index: number) => (
                 <motion.div
@@ -390,9 +416,10 @@ export default function HomePage() {
                   key={index} className="flex items-center"
                   onClick={() => {
                     handleScroll(word.href)
+                    setShowMenu(false)
                   }}
                 >
-                  <div className={`inline-flex h-full w-full cursor-pointer items-center justify-center border border-slate-800 rounded-full ${word.color} px-3 py-3 text-[9px] font-retro text-white backdrop-blur-3xl shadow-rose-300/30 shadow-md hover:transform hover:scale-110 duration-200`}>
+                  <div className={`inline-flex h-full w-full md:w[50%] cursor-pointer items-center justify-center border border-slate-800 rounded-md bg-purple-500/10 ${word.color} px-3 py-3 text-[9px] font-retro text-white backdrop-blur-3xl shadow-rose-300/30 shadow-md hover:transform hover:scale-110 duration-200`}>
                     <a>{word.title}</a>
                   </div>
                 </motion.div>
@@ -486,15 +513,15 @@ export default function HomePage() {
           </div>
         </div>
         <div className="w-full flex p-3" id="competences">
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-yellow-400/30 transition-all rounded-md border-amber-500">
-            <h2 className="text-yellow-200 font-retro p-2 items-center animate-pulse" >
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-amber-500">
+            <h2 className="text-yellow-200 font-retro p-2 items-center" >
               Compétences
             </h2>
           </div>
         </div>
         <div className="flex flex-col w-full gap-28 p-3">
           <div className="flex md:flex-row flex-col justify-start w-full bg-neutral-900 py-5 rounded-md">
-            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center p-2">
+            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center ">
               <Card title="Développement" icon={<IconDeviceIpadHorizontalCode size={50} className="text-white overflow-y-auto" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
@@ -510,7 +537,7 @@ export default function HomePage() {
               </div>
               <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
             </div>
-            <div className="flex w-full justify-center p-4">
+            <div className="flex w-fit justify-center p-4">
               <ul className="text-yellow-50 font-mono grid grid-cols-2 md:gap-x-40 gap-x-5">
                 {skills.map((word: string, index: number) => (
                   <li key={index} className="flex items-center">
@@ -587,7 +614,7 @@ export default function HomePage() {
               </div>
               <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
             </div>
-            <div className="flex p-4">
+            <div className="flex w-fit max-w-[500px] p-4">
               <ul className="flex flex-col justify-center w-full gap-6 font-mono text-yellow-50">
                 <li>1. Installation d'un serveur Web</li>
                 <li>2. Securiser un serveur web</li>
@@ -627,8 +654,8 @@ export default function HomePage() {
           </div>
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-pink-400/30 transition-all rounded-md border-pink-500">
-            <h2 className="text-pink-300 font-retro p-2 items-center animate-pulse" id="parcours">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-500">
+            <h2 className="text-pink-300 font-retro p-2 items-center" id="parcours">
               Parcours
             </h2>
           </div>
@@ -653,8 +680,8 @@ export default function HomePage() {
           </div>
         </div>
         <div className="p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-cyan-500/30 transition-all rounded-md border-cyan-500">
-            <h2 className="text-blue-300 font-retro p-2 items-center animate-pulse" id="experience">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-cyan-500">
+            <h2 className="text-blue-300 font-retro p-2 items-center" id="experience">
               Experiences
             </h2>
           </div>
@@ -665,14 +692,14 @@ export default function HomePage() {
           </div>
         </div>
         <div className="w-full flex flex-col justify-center items-center p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-indigo-400/30 transition-all rounded-md border-purple-500">
-            <h2 className="text-purple-400 font-retro p-2 items-center animate-pulse" id="projets">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-purple-500">
+            <h2 className="text-purple-400 font-retro p-2 items-center" id="projets">
               Projets
             </h2>
           </div>
           <div className="w-full flex flex-col justify-center items-center">
-            <div className="flex border-[15px] min-h-[400px] md:w-[52%] w-[80%] max-w-[700px] border-neutral-900 rounded-md mt-10">
-              <div className="flex flex-col justify-start min-h-[400px] w-full bg-radial from-indigo-300/30 to-neutral-900">
+            <div className="flex border-[15px] min-h-[400px] h-[300px] md:w-[52%] w-[80%] max-w-[700px] border-neutral-900 rounded-md mt-10">
+              <div className="flex flex-col justify-start min-h-[300px] w-full bg-radial from-indigo-300/30 to-neutral-900">
                 <div className="flex md:flex-row flex-col flex-wrap gap-4 p-4">
                   <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
                     <img src="/webtoona.png" alt="" className="w-full"
@@ -726,13 +753,13 @@ export default function HomePage() {
           </div>
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-green-400/30 transition-all rounded-md border-green-500">
-            <h2 className="text-emerald-400 font-retro p-2 items-center animate-pulse" id="certificats">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-green-500">
+            <h2 className="text-emerald-400 font-retro p-2 items-center" id="certificats">
               Certificats
             </h2>
           </div>
           <div className="w-full flex lg:flex-row p-8 flex-col gap-4">
-            <div className="flex lg:w-1/2 w-full h-auto gap-5 p-4 flex-wrap border-2 hover:bg-yellow-500 hover:text-black border-yellow-500">
+            <div className="flex lg:w-1/2 w-full h-auto gap-5 p-4 flex-wrap border-2 hover:bg-lime-500/20 rounded-3xl hover:text-black border-lime-500">
               <div className="aspect-square w-30">
                 <img src="/cisco.png" alt="cisco" />
               </div>
@@ -748,7 +775,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-cyan-400 hover:bg-cyan-400 hover:text-black border-2">
+            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-blue-400 hover:bg-blue-400/20 rounded-3xl hover:text-black border-2">
               <div className="aspect-square w-30">
                 <img src="/google.png" alt="cisco" />
               </div>
@@ -759,8 +786,8 @@ export default function HomePage() {
           </div>
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-orange-400/30 transition-all rounded-md border-orange-500">
-            <h2 className="text-orange-400 font-retro p-2 items-center animate-pulse" id="veille">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-orange-500">
+            <h2 className="text-orange-400 font-retro p-2 items-center " id="veille">
               Veille Technologique
             </h2>
           </div>
@@ -806,71 +833,86 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col p-4" >
-          <div className="flex w-full self-center items-center justify-center border text-center border-dashed hover:bg-rose-400/30 transition-all rounded-md border-rose-500">
-            <h2 className="text-rose-400 font-retro p-2 items-center animate-pulse" id="contact">
-              Contact
-            </h2>
-          </div>
-          <div style={{ position: 'relative', height: '500px', overflow: 'hidden' }}>
-            <RippleGrid
-              enableRainbow={false}
-              gridColor="#ff006a"
-              rippleIntensity={0.1}
-              gridSize={10}
-              gridThickness={10}
-              mouseInteraction={true}
-              mouseInteractionRadius={1.2}
-              opacity={2}
-            />
-            <div className="absolute top-1 flex justify-between items-center w-full h-full p-6 gap-4">
-              <div className="w-1/2 flex flex-col">
-                <motion.div
-                  animate={{ y: [0, -30, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-full">
-                  <img
-                    src="/plane.png"
-                    alt="plane"
-                  />
-                </motion.div>
+        <div>
+          <div className="w-full flex flex-col">
+            <div className="pl-4 pr-4 w-full flex justify-center items-center">
+              <div className="flex w-full self-center items-center justify-center border text-center  transition-all rounded-md border-indigo-500">
+                <h2 className="text-indigo-400 font-retro p-2 items-center" id="contact">
+                  Contact
+                </h2>
               </div>
-              <div className="w-1/2 h-full bg-slate-500/10 backdrop-blur-xs border border-white/20 rounded-2xl">
-                <div>
-                  <div>
+            </div>
+            <div className="w-full h-full flex">
+              <div className="relative flex flex-col w-full h-full">
+                <div style={{ width: '100%', height: '600px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <DarkVeil />
+                </div>
+                <div className="w-full h-full flex flex-col justify-center items-center py-0 absolute top-2/5 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <AnimatePresence mode='popLayout'>
+                    {sendEmailStatus === 'success' ? (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{
+                          opacity: [0, 1, 0, 1, 0, 1, 0, 1],
+                           y: [0, 0, 0, 0, 0, 0, 0, 0],
+                        }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 2 }}
+                        className="flex items-center gap-2 py-4">
+                        <IconCheck className="w-4 h-4 text-green-500" />
+                        <span className="text-green-500 font-retro text-[10px]">
+                          Message envoyé
+                        </span>
+                      </motion.div>
+                    ) : sendEmailStatus === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex items-center gap-2 py-4">
+                        <IconX className="w-4 h-4 text-red-500" />
+                        <span className="text-red-500 font-retro text-[10px]">
+                          Erreur lors de l'envoi du message
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  <div className="bg-black border border-white/20 rounded-2xl w-2/3">
                     <FormikProvider value={formik}>
-                      <Form className="flex flex-col gap-4 p-4">
-                        <div className="flex flex-col gap-2 p-2">
+                      <Form className="flex flex-col w-full gap-4 p-4">
+                        <div className="flex flex-col gap-2 md:p-2 p-0">
                           <label htmlFor="name" className="text-white font-retro text-xs">Nom</label>
                           <input
                             id="name"
                             name="name"
                             type="text"
-                            className="text-white"
+                            className="text-white border border-white/20 rounded-md shadow-md shadow-neutral-950 hover:bg-neutral-700/20 backdrop-blur-3xl p-2 bg-transparent"
                             value={formik.values.name}
                             onChange={(e: any) => formik.setFieldValue("name", e.target.value)} />
                         </div>
-                        <div className="flex flex-col gap-2 p-2">
+                        <div className="flex flex-col gap-2 md:p-2 p-0">
                           <label htmlFor="email" className="text-white font-retro text-xs">Email</label>
                           <input
                             id="email"
                             name="email"
                             type="email"
-                            className="text-white"
+                            className="text-white border border-white/20 rounded-md shadow-md shadow-neutral-950 hover:bg-neutral-700/20 backdrop-blur-3xl p-2 bg-transparent"
                             value={formik.values.email}
                             onChange={(e: any) => formik.setFieldValue("email", e.target.value)} />
                         </div>
-                        <div className="flex flex-col gap-2 p-2">
+                        <div className="flex flex-col gap-2 md:p-2 p-0">
                           <label htmlFor="message" className="text-white font-retro text-xs">Message</label>
                           <textarea
                             id="message"
                             name="message"
-                            className="text-white"
+                            rows={4}
+                            className="text-white border border-white/20 rounded-md shadow-md shadow-neutral-950 hover:bg-neutral-700/20 backdrop-blur-3xl p-2 bg-transparent resize-none"
                             value={formik.values.message}
                             onChange={(e: any) => formik.setFieldValue("message", e.target.value)} />
                         </div>
-                        <div className="flex flex-col gap-2 p-2">
-                          <button type="submit" className="bg-slate-500/40 text-white text-xs font-retro p-2 rounded-xs self-center">Envoyer</button>
+                        <div className="flex flex-col gap-2 md:p-2 p-0">
+                          <button type="submit" className="bg-indigo-500 hover:bg-indigo-700 cursor-pointer hover:scale-110 text-white text-xs font-retro p-2 rounded-md self-center transition-all">Envoyer</button>
                         </div>
                       </Form>
                     </FormikProvider>
@@ -880,10 +922,25 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        <div className="w-full h-20 flex flex-row gap-3 bg-blue-950/50 justify-start items-center p-4">
+          <a
+            className="bg-blue-900 rounded-full p-1 hover:bg-blue-700 transition-all"
+            href="https://www.linkedin.com/in/manal-khalqallah-33a35133b/"
+            target="_blank"
+          >
+            <IconBrandLinkedinFilled className="w-8 h-8 p-1 text-white" />
+          </a>
+          <a
+            className="bg-blue-900 rounded-full p-1 hover:bg-blue-700 transition-all"
+            href="https://www.canva.com/design/DAGTpe1Bpas/8g7d57zcpligpH_Tzytm3w/edit?utm_content=DAGTpe1Bpas&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+            target="_blank"
+          >
+            <IconFileCv className="w-8 h-8 p-1 text-white" />
+          </a>
+        </div>
       </div >
     </>
   )
 }
-
 
 

@@ -1,33 +1,45 @@
-import { Resend } from 'resend';
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 
 export const sendEmail = async ({
-    from,
-    to,
-    subject,
-    html,
+    nom,
+    email,
+    time,
+    message,
 }: {
-    from: string,
-    to: string,
-    subject: string,
-    html: string,
+    nom: string,
+    email: string,
+    time: string,
+    message: string,
 }) => {
+
     try {
-        const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
-        const { data, error } = await resend.emails.send({
-            from,
-            to,
-            subject,
-            html,
-        });
-
-        if (error) {
-            throw error;
+        if (!process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID || !process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID || !process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY) {
+            return 'error';
         }
-        return data;
+
+        const response = await emailjs.send(
+            process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID,
+            process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID,
+            {
+                nom,
+                email,
+                time,
+                message,
+            },
+            {
+                publicKey: process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY,
+            }
+        )
+
+        if (response.status === 200) {
+            return 'success';
+        } else {
+            return 'error';
+        }
     } catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
+        if (error instanceof EmailJSResponseStatus) {
+            return 'error';
+        }
     }
 }
-
