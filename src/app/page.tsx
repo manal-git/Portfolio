@@ -134,9 +134,9 @@ export default function HomePage() {
   const skills = ['C', 'HTML', 'CSS', 'python', 'php', 'SQL', 'GIT/GITHub', 'JavaScript', 'React', 'Next.js', 'Node.js', 'Express.js', 'TypeScript', 'Tailwind'];
   const section = [
     {
-      title: 'Acceuil',
+      title: 'Accueil',
       color: 'hover:bg-red-600',
-      href: '#acceuil'
+      href: '#accueil'
     },
     {
       title: 'A propos',
@@ -279,7 +279,7 @@ useEffect(() => {
       doc: "https://drive.google.com/file/d/1GsdEKg3wlS-4F0wkT0LZHaoowFRGlrub/view?usp=sharing",
       gitlink: "https://github.com/manal-git/WEBtoon.git",
       testimonials: [
-        { name: "Acceuil", src: "/webtoon.png" },
+        { name: "Accueil", src: "/webtoon.png" },
         { name: "Page de connexion", src: "/login.png" },
         { name: "Page d'inscription", src: "/signup.png" },
         { name: "Page de publication de BD", src: "/publish.png" },
@@ -296,7 +296,7 @@ useEffect(() => {
       doc: "https://drive.google.com/file/d/1QacY8gVtLnpdff6qxwembGM_9QbCLNW9/view?usp=sharing",
       gitlink: "https://github.com/manal-git/jeux_nombre.git",
       testimonials: [
-        { name: "L'acceuil", src: "/jeu1.png" },
+        { name: "L'accueil", src: "/jeu1.png" },
         { name: "Phase du jeu", src: "/jeu2.png" },
         { name: "La documontation du jeu", src: "/jeu3.png" },
       ],
@@ -309,7 +309,7 @@ useEffect(() => {
       doc: "https://drive.google.com/file/d/1aLg76xXbdXadlSmPAgKdVQMMxNj0eS2n/view?usp=sharing",
       gitlink: "https://github.com/manal-git/mode.git",
       testimonials: [
-        { name: "Acceuil", src: "/mode1.jpg" },
+        { name: "Accueil", src: "/mode1.jpg" },
         { name: "Système de vote", src: "/mode2.jpg" },
         { name: "Resultat du vote", src: "/mode3.jpg" },
 
@@ -447,7 +447,7 @@ useEffect(() => {
             chromaticAberration={0.002}
             noiseIntensity={0.01}
           />
-          <div className="absolute top-1 left-1/2 transform -translate-x-1/2 flex gap-2 flex-col w-fit h-full justify-center items-center" id="acceuil">
+          <div className="absolute top-1 left-1/2 transform -translate-x-1/2 flex gap-2 flex-col w-fit h-full justify-center items-center" id="accueil">
             <motion.div
               animate={{
                 y: [0, -20, 0],
