@@ -3,7 +3,7 @@
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import Card from "@/components/ui/card";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandLinkedinFilled, IconBrandUbuntu, IconBrandWindows, IconCheck, IconDeviceIpadHorizontalCode, IconDevicesPc, IconFileCv, IconLanguage, IconMenu2, IconTablePlus, IconX } from '@tabler/icons-react';
+import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandLinkedinFilled, IconBrandUbuntu, IconBrandWindows, IconCheck, IconDeviceIpadHorizontalCode, IconDevicesPc, IconFileCv, IconLanguage, IconMenu2, IconReportSearch, IconTablePlus, IconX } from '@tabler/icons-react';
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinux } from '@fortawesome/free-brands-svg-icons'
@@ -201,7 +201,7 @@ export default function HomePage() {
   const content = [
     {
       title: "Professionnelle",
-      subtitle: "Stage chez Turnadon du 18 mai au 4 juillet et du 01 decembre au 23 janvier - Paris (2025)",
+      subtitle: "Stage chez Turnadon du 18 mai au 4 juillet et du 01 decembre au 23 janvier - Paris (2025-2026)",
       description: [
         "Développement front-end avec React, Tailwind CSS et Redux Toolkit (pages, thèmes, responsive design).",
         "Développement back-end avec Node.js et Express (API REST, base de données, routes).",
@@ -702,6 +702,20 @@ export default function HomePage() {
               Experiences
             </h2>
           </div>
+          <div className="flex flex-col justify-start pt-2">
+            <a href="/rapport-1er.pdf" className="text-cyan-400 flex hover:cursor-pointer hover:underline font-retro text-xs items-center">
+              <div className=" flex items-center p-2">
+                <IconReportSearch size={20} className="text-cyan-400 overflow-y-auto" />
+              </div>
+              Rapport stage 1er année
+            </a>
+            <a href="/rapport-2éme.pdf" className="text-cyan-400 flex hover:cursor-pointer hover:underline font-retro text-xs items-center">
+              <div className=" flex items-center p-2">
+                <IconReportSearch size={20} className="text-cyan-400 overflow-y-auto" />
+              </div>
+              Rapport stage 2ème année
+            </a>
+          </div>
           <div className="w-full flex flex-col justify-center items-center">
             <div className="lg:w-3/4 w-full py-4">
               <StickyScroll content={content} />
@@ -806,7 +820,7 @@ export default function HomePage() {
               </div>
               <div className="p-5 font-retro md:text-md text-xs text-white text-left animate-pulse">
                 <a href="/pix.pdf" target="_blank" rel="noopener noreferrer">
-                  <p className="hover:cursor-pointer">{'>' + ' Certificats Pix'}</p>
+                  <p className="hover:cursor-pointer hover:underline">{'>' + ' Certificats Pix'}</p>
                 </a>
               </div>
             </div>
