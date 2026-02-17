@@ -3,7 +3,7 @@
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import Card from "@/components/ui/card";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandLinkedinFilled, IconBrandUbuntu, IconBrandWindows, IconCheck, IconDeviceIpadHorizontalCode, IconDevicesPc, IconFileCv, IconLanguage, IconMenu2, IconX } from '@tabler/icons-react';
+import { IconAerialLift, IconAntenna, IconBrandDebian, IconBrandLinkedinFilled, IconBrandUbuntu, IconBrandWindows, IconCheck, IconDeviceIpadHorizontalCode, IconDevicesPc, IconFileCv, IconLanguage, IconMenu2, IconTablePlus, IconX } from '@tabler/icons-react';
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinux } from '@fortawesome/free-brands-svg-icons'
@@ -31,7 +31,7 @@ const articles = [
     icon: <Box className="h-4 w-4 text-white dark:text-neutral-400" />,
     link: "https://www.researchgate.net/publication/385737356_BENCHMARKING_FRONT-END_FRAMEWORKS_A_DEEP_DIVE_INTO_THE_PERFORMANCE_AND_SCALABILITY_OF_REACT_ANGULAR_AND_VUEJS",
     title: "Benchmarking Front-end Frameworks",
-    description: "Un approfondissement sur la performance et la scalabilité des language tel que React, Angular, VueJS...",
+    description: "Un approfondissement sur la performance et la scalabilité des langages tel que React, Angular, VueJS...",
   },
   {
     area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
@@ -63,7 +63,7 @@ const articles2 = [
     icon: <Box className="h-4 w-4 text-white dark:text-neutral-400" />,
     link: "https://laconsole.dev/blog/top-frameworks-developpement",
     title: "Les 30 frameworks à apprendre en 2025",
-    description: "Les choix d'un framewoek est moins déterminant que le choix de langague, car une fois un language maitrisé, de nombreux frameworks sont accessibles...",
+    description: "Les choix d'un framework est moins déterminant que le choix de langage, car une fois un langage maitrisé, de nombreux frameworks sont accessibles...",
   },
   {
     area: "md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]",
@@ -186,16 +186,16 @@ export default function HomePage() {
   const [showPopup, setShowPopup] = useState<ProjectKey | null>(null);
   const [sendEmailStatus, setSendEmailStatus] = useState<"success" | "error" | null>(null);
 
-useEffect(() => {
-  const checkMobile = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
-  
-  checkMobile();
-  window.addEventListener('resize', checkMobile);
-  
-  return () => window.removeEventListener('resize', checkMobile);
-}, []); 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const content = [
@@ -225,7 +225,7 @@ useEffect(() => {
       subtitle: "Stylist - ile de france (2020 - 2022)",
       description: [
         "Assistance à une styliste pour l'organisation et la préparation des tenues pour des séances photo.",
-        "Gestion de l'inventaire des pièces de garde-robe et accéssoires en fonction des demandes des clients.",
+        "Gestion de l'inventaire des pièces de garde-robe et accessoires en fonction des demandes des clients.",
       ],
       content: (
         <motion.div
@@ -240,7 +240,7 @@ useEffect(() => {
     {
       subtitle: "Nounou - Argenteuil (2018 - 2021)",
       description: [
-        "gérer les emplois du temps quotidiens des enfants et de garantir leur ponctualité et leur organisation.",
+        "Gérer les emplois du temps quotidiens des enfants et garantir leur ponctualité et leur organisation.",
       ],
       content: (
         <motion.div
@@ -257,8 +257,8 @@ useEffect(() => {
       description: [
         "2023 : Création de maquettes pour plusieurs sites web à l'aide de Figma.",
         "2024 : Conception d’un projet de défilé de mode avec site web d’un systeme de vote.",
-        "2024 : Conception d'un jeux de devinette d'un nombre aléatoire.",
-        "2025 : Création d'un portfolio web en ulitisant les conpétances aquis pendant le stage.",
+        "2024 : Conception d'un jeu de devinette d'un nombre aléatoire.",
+        "2025 : Création d'un portfolio web en utilisant les compétences acquises pendant le stage.",
       ],
       content: (
         <motion.div
@@ -524,6 +524,18 @@ useEffect(() => {
             </h2>
           </div>
         </div>
+        <div className="flex p-2">
+          <div className="flex w-full justify-start items-center">
+            <a href="/tableausynthèse.pdf" target="_blank" className="flex text-amber-400 hover:cursor-pointer hover:underline font-retro text-xs p-2 items-center">
+              <div className="flex pr-2 items-center justify-center">
+                <IconTablePlus size={20} className="text-amber-400 items-center" />
+              </div>
+              <p className="flex">
+                Tableau de compétences
+              </p>
+            </a>
+          </div>
+        </div>
         <div className="flex flex-col w-full gap-28 p-3">
           <div className="flex md:flex-row flex-col justify-start w-full bg-neutral-900 py-5 rounded-md">
             <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center ">
@@ -622,10 +634,10 @@ useEffect(() => {
             <div className="flex w-fit max-w-[500px] p-4">
               <ul className="flex flex-col justify-center w-full gap-6 font-mono text-yellow-50">
                 <li>1. Installation d'un serveur Web</li>
-                <li>2. Securiser un serveur web</li>
+                <li>2. Sécuriser un serveur web</li>
                 <li>3. Adressage IP (avec Cisco Packet tracer)</li>
-                <li>4. Realiser des machines virtuelles</li>
-                <li>5. Realisation d'une connection SSH entre machine virtuelle dans un réseau local</li>
+                <li>4. Réaliser des machines virtuelles</li>
+                <li>5. Réalisation d'une connexion SSH entre machine virtuelle dans un réseau local</li>
               </ul>
             </div>
           </div>
@@ -634,7 +646,7 @@ useEffect(() => {
             <div className='flex p-15 h-full md:w-1/2 w-full justify-center items-center'>
               <ol className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
                 <li className="flex items-center">{'>' + ' Anglais' + ' C1'}</li>
-                <li className="flex items-center">{'>' + ' Francais' + ' B1'}</li>
+                <li className="flex items-center">{'>' + ' Français' + ' C1'}</li>
                 <li className="flex items-center">{'>' + ' Arabe' + ' Langue maternelle'}</li>
               </ol>
             </div>
@@ -763,36 +775,46 @@ useEffect(() => {
               Certificats
             </h2>
           </div>
-          <div className="w-full flex lg:flex-row p-8 flex-col gap-4">
-            <div className="flex lg:w-1/2 w-full h-auto gap-5 p-4 flex-wrap border-2 hover:bg-lime-500/20 rounded-3xl hover:text-black border-lime-500">
+          <div className="w-full flex lg:flex-row p-6 flex-col gap-4">
+            <div className="flex lg:w-1/2 w-full h-auto p-4 flex-wrap border-1 hover:bg-lime-500/20 rounded-3xl hover:text-black border-lime-500">
               <div className="aspect-square w-30">
                 <img src="/cisco.png" alt="cisco" />
               </div>
-              <div className="flex flex-col gap-6 p-2">
+              <div className="flex flex-col gap-6 p-2 animate-pulse">
                 <div className="p-2 font-retro md:text-md text-xs text-white text-left">
-                  <p>Certificats Packet Tracer</p>
+                  <a href="https://www.credly.com/badges/954629da-abc1-4555-a7a0-00de21cc6e82/public_url" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats Packet Tracer'}</a>
                 </div>
                 <div className="p-2 font-retro md:text-md text-xs text-white text-left">
-                  <p>Certificats Networking Basics</p>
+                  <a href="https://www.credly.com/badges/794a361b-e669-4e7a-b1f9-46397b490117/public_url" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats Networking Basics'}</a>
                 </div>
                 <div className="p-2 font-retro md:text-md text-xs text-white text-left">
-                  <p>Certificats CSS Essentials</p>
+                  <a href="https://www.credly.com/badges/33998236-9232-463a-9233-31a382222222/public_url" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats CSS Essentials'}</a>
                 </div>
               </div>
             </div>
-            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-blue-400 hover:bg-blue-400/20 rounded-3xl hover:text-black border-2">
+            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-blue-400 hover:bg-blue-400/20 rounded-3xl hover:text-black border-1">
               <div className="aspect-square w-30">
-                <img src="/google.png" alt="cisco" />
+                <img src="/google.png" alt="google" />
               </div>
-              <div className="p-5 font-retro md:text-md text-xs text-white text-left">
-                <p className="">Certificats Google Analytics</p>
+              <div className="p-5 font-retro md:text-md text-xs text-white text-left animate-pulse">
+                <a href="https://skillshop.credential.net/0ba5138b-cd46-46a4-8281-fb65858efc83#acc.3xiEL4qI" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats Google Analytics'}</a>
+              </div>
+            </div>
+            <div className="flex lg:w-1/2 w-full p-3 gap-5 flex-wrap border-red-500 hover:bg-red-400/20 rounded-3xl hover:text-black border-1">
+              <div className="aspect-square w-30">
+                <img className="w-full h-30" src="/pix.png" alt="pix" />
+              </div>
+              <div className="p-5 font-retro md:text-md text-xs text-white text-left animate-pulse">
+                <a href="/pix.pdf" target="_blank" rel="noopener noreferrer">
+                  <p className="hover:cursor-pointer">{'>' + ' Certificats Pix'}</p>
+                </a>
               </div>
             </div>
           </div>
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-orange-500">
-            <h2 className="text-orange-400 font-retro p-2 items-center " id="veille">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-rose-500">
+            <h2 className="text-rose-400 font-retro p-2 items-center " id="veille">
               Veille Technologique
             </h2>
           </div>
@@ -859,7 +881,7 @@ useEffect(() => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{
                           opacity: [0, 1, 0, 1, 0, 1, 0, 1],
-                           y: [0, 0, 0, 0, 0, 0, 0, 0],
+                          y: [0, 0, 0, 0, 0, 0, 0, 0],
                         }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 2 }}
@@ -883,7 +905,7 @@ useEffect(() => {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                  <div className="bg-black border border-white/20 rounded-2xl w-2/3">
+                  <div className="bg-black/50 border border-white/20 rounded-2xl w-2/3">
                     <FormikProvider value={formik}>
                       <Form className="flex flex-col w-full gap-4 p-4">
                         <div className="flex flex-col gap-2 md:p-2 p-0">
