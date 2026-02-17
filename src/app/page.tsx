@@ -283,7 +283,7 @@ export default function HomePage() {
         { name: "Page de connexion", src: "/login.png" },
         { name: "Page d'inscription", src: "/signup.png" },
         { name: "Page de publication de BD", src: "/publish.png" },
-        { name: "Page de lecture", src: "/lecture.jpg" },
+        { name: "Page de lecture", src: "/lecture.png" },
         { name: "Page de la bibliothèque", src: "/library.png" },
         { name: "Page des genres", src: "/genre.png" },
       ],
@@ -309,9 +309,9 @@ export default function HomePage() {
       doc: "https://drive.google.com/file/d/1aLg76xXbdXadlSmPAgKdVQMMxNj0eS2n/view?usp=sharing",
       gitlink: "https://github.com/manal-git/mode.git",
       testimonials: [
-        { name: "Accueil", src: "/mode1.jpg" },
-        { name: "Système de vote", src: "/mode2.jpg" },
-        { name: "Resultat du vote", src: "/mode3.jpg" },
+        { name: "Accueil", src: "/mode1.png" },
+        { name: "Système de vote", src: "/mode2.png" },
+        { name: "Resultat du vote", src: "/mode3.png" },
 
       ],
     },
@@ -854,6 +854,18 @@ export default function HomePage() {
             </div>
           </div>
           <div>
+            <div className="flex flex-col bg-neutral-900 p-4 justify-between w-[80%] mx-auto rounded-md overflow-hidden my-2">
+              <div className="pb-4">
+                <h3 className="text-green-400 font-retro text-center items-center">Problematique</h3>
+              </div>
+              <div className="w-full rounded-lg overflow-hidden">
+                <div className="w-full rounded-lg overflow-hidden">
+                  <p className="text-white font-mono text-center items-center">
+                    {">"} {"Comment le choix d'un framework influence-t-il la performance d'un projet web, et quels critères faut-il considérer pour sélectionner le plus adapté selon le type de projet et ses contraintes ?"}
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col w-full transition-all rounded-md">
               <h2 className="text-rose-400 text-xs font-retro pl-6 p-4 text-center">
                 Performance web et méthodologie d’évaluation
