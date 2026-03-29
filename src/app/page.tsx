@@ -95,7 +95,7 @@ const navItems = [
 ];
 
 type Testimonial = { name: string; src: string };
-type ProjectKey = "webtoona" | "jeu" | "mode";
+type ProjectKey = "webtoona" | "jeu" | "mode" | "glowup";
 type ProjectData = {
   title: string;
   description: string;
@@ -315,6 +315,22 @@ export default function HomePage() {
 
       ],
     },
+    
+    glowup: {
+      title: "GlowUp",
+      description: `>  Ce projet consiste en la conception et le développement d’une application mobile/web,
+      GlowUp, destinée à faciliter la prise de rendez-vous dans les salons de beauté. L’application
+      permet aux clients de créer un compte, de réserver des prestations (coiffure, manucure, soins,
+      etc.), et de gérer leurs rendez-vous.`,
+      icon: "glowup.png",
+      doc: "/Description2.pdf",
+      gitlink: "https://github.com/manal-git/GlowUp.git",
+      testimonials: [
+        { name: "Connexion", src: "/glowup1.png" },
+        { name: "Inscription", src: "/glowup2.png" },
+
+      ],
+    },
   };
 
   const formikValidationSchema = Yup.object({
@@ -497,9 +513,23 @@ export default function HomePage() {
           </div>
         </div>
         <div ref={aboutRef} className="flex md:flex-row flex-col justify-between w-[80%] mx-auto rounded-md overflow-hidden my-1 md:my-14">
-          <div className="h-full">
+          <div className="h-full flex flex-col justify-center items-center p-1">
             <div className="flex flex-col w-40 h-40 p-10 justify-center">
               <img src="/avatar.png" alt="" className="animate-[bounce_3s_ease-in-out_infinite]" />
+            </div>
+            <div className="flex flex-row justify-center items-center p-1">
+              <a href="/Description1.pdf" target="_blank" className="flex text-amber-400 hover:cursor-pointer hover:underline font-mono text-xs items-center">
+                <p className="flex">
+                  - Details du portfolio
+                </p>
+              </a>
+            </div>
+            <div>
+              <a href="/unitaire1.pdf" target="_blank" className="flex text-amber-400 hover:cursor-pointer hover:underline font-mono text-xs items-center">
+                <p className="flex">
+                  - Cahier de test unitaire
+                </p>
+              </a>
             </div>
           </div>
           <div className="w-full rounded-lg overflow-hidden">
@@ -749,6 +779,12 @@ export default function HomePage() {
                       onClick={() => setShowPopup("mode")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">Walk your worth</p>
+                  </div>
+                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
+                    <img src="/glowup.png" alt="" className="p-1 w-full"
+                      onClick={() => setShowPopup("glowup")}
+                    />
+                    <p className="font-mono text-amber-50 text-[10px] text-center">GlowUp</p>  
                   </div>
                 </div>
               </div>

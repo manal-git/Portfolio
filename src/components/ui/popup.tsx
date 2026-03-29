@@ -52,7 +52,7 @@ export const Popup = ({
                     <div>
                         {doc && (
                             <Link href={doc} target="_blank" className="text-blue-500 font-mono hover:cursor-pointer hover:underline">
-                                Cahier de charges
+                                Cahier de charges/ Spécification technique
                             </Link>
                         )}
                     </div>
