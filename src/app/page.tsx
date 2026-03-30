@@ -25,6 +25,10 @@ import DarkVeil from "@/components/ui/DarkVeil";
 import { sendEmail } from "@/utils/emailUtils";
 
 
+const retro = Press_Start_2P({
+  subsets: ['latin'],
+  weight: '400',
+});
 const articles = [
   {
     area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
@@ -970,7 +974,7 @@ export default function HomePage() {
             <div className="flex flex-col w-full transition-all rounded-md">
               <h2 className="text-pink-400 text-xs font-retro pl-6 p-4 text-center">
                 Performance web et méthodologie d’évaluation
-              </h2>
+              </h2>s
             </div>
             <div className="bg-black p-5">
               <Grid items={articles} />
