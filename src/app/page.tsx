@@ -315,7 +315,7 @@ export default function HomePage() {
 
       ],
     },
-    
+
     glowup: {
       title: "GlowUp",
       description: `>  Ce projet consiste en la conception et le développement d’une application mobile/web,
@@ -327,7 +327,9 @@ export default function HomePage() {
       gitlink: "https://github.com/manal-git/GlowUp.git",
       testimonials: [
         { name: "Connexion", src: "/glowup1.png" },
-        { name: "Inscription", src: "/glowup2.png" },
+        { name: "Accueil", src: "/glowup2.png" },
+        { name: "Inscription", src: "/glowup3.png" },
+
 
       ],
     },
@@ -410,45 +412,52 @@ export default function HomePage() {
           })()}
         </div>
       )}
-      <nav className="flex flex-row fixed top-1 left-1 backdrop-blur-sm right-1 z-50 gap-2 p-2 bg-neutral-900/10  border border-slate-800 shadow-2xl rounded-lg">
-        <div className="flex flex-row w-full justify-between items-center">
-          <div className="flex flex-row items-center justify-center">
-            <img src="/avatar.png" alt="" className="w-10 h-10 p-1" />
-            <p className="text-amber-300/80 font-retro px-2 text-xs">MK</p>
-          </div>
-          <div
-            className="cursor-pointer active:scale-120 transition-all duration-100 md:hidden"
-            onClick={() => {
-              setShowMenu(!showMenu);
-            }}
-          > {showMenu && isMobile ?
-            <IconX className="w-6 h-6 text-amber-300/80 transition-all duration-200" />
-            :
-            <IconMenu2 className="w-6 h-6 text-amber-300/80 transition-all duration-200" />
-            }
-          </div>
-          <div className={`w-full gap-2 md:justify-end justify-center ${showMenu && isMobile ? "fixed top-15 left-0 right-0 flex flex-col items-end" : "hidden md:flex flex-row"}`}>
-            <AnimatePresence>
-              {section.map((word: { title: string, color: string, href: string }, index: number) => (
-                <motion.div
-                  initial={{ x: -5 * index, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, type: "spring", stiffness: 260, damping: 20 }}
-                  key={index} className="flex items-center"
-                  onClick={() => {
-                    handleScroll(word.href)
-                    setShowMenu(false)
-                  }}
-                >
-                  <div className={`inline-flex h-full w-full md:w[50%] cursor-pointer items-center justify-center border border-slate-800 rounded-md bg-purple-500/10 ${word.color} px-3 py-3 text-[9px] font-retro text-white backdrop-blur-3xl shadow-rose-300/30 shadow-md hover:transform hover:scale-110 duration-200`}>
-                    <a>{word.title}</a>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+
+      <nav className="fixed top-1 left-1 right-1 z-50 flex items-center justify-between p-2 px-6 gap-2 font-mono rounded-full border border-pink-400/30 bg-neutral-900/10 backdrop-blur-xs shadow-2xl">
+
+        <div className="flex items-center">
+          <img src="/avatar.png" alt="" className="w-10 h-10 p-1" />
+          <p className="px-2 text-xs font-retro text-pink-300">MK</p>
         </div>
+
+        <div
+          className="cursor-pointer md:hidden transition-transform duration-100 active:scale-125"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          {showMenu && isMobile ? (
+            <IconX className="w-6 h-6 text-pink-300/80" />
+          ) : (
+            <IconMenu2 className="w-6 h-6 text-pink-300/80" />
+          )}
+        </div>
+
+        <div
+          className={`w-full gap-2 ${showMenu && isMobile
+            ? "fixed top-14 left-0 right-0 flex flex-col items-end p-2"
+            : "hidden md:flex flex-row justify-end items-center"
+            }`}
+        >
+          <AnimatePresence>
+            {section.map((word, index) => (
+              <motion.div
+                key={index}
+                initial={{ x: -5 * index, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.4, type: "spring", stiffness: 260, damping: 20 }}
+                className="cursor-pointer text-sm px-2 py-1 hover:text-cyan-400 text-pink-200 transition-colors duration-150"
+                onClick={() => {
+                  handleScroll(word.href);
+                  setShowMenu(false);
+                }}
+              >
+                {word.title}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
       </nav>
+
       <div>
         <div style={{ width: '100%', height: '600px', position: 'relative' }}>
           <GridScan
@@ -475,10 +484,10 @@ export default function HomePage() {
                 repeatType: 'loop',
                 repeatDelay: 0,
               }}
-              className="md:w-3/4 w-[80%] m-5 drop-shadow-xl drop-shadow-pink-500/60">
-              <img src="/title.png" alt="" />
+              className="md:w-[40%] w-[80%] m-5 drop-shadow-xl drop-shadow-pink-500/40">
+              <img src="/title.png" alt="" className="w-full h-full backdrop-blur-3xl" />
             </motion.div>
-            <div className="relative w-full flex flex-col justify-center items-center">
+            {/* <div className="relative w-full flex flex-col justify-center items-center">
               {
                 started && (
                   <motion.div
@@ -507,201 +516,234 @@ export default function HomePage() {
                 className={`text-yellow-300 py-6 px-4 md:text-lg text-xs rounded-2xl cursor-pointer hover:animate-none animate-pulse transition duration-300 ${press.className}`}>
                 PRESS TO START
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="absolute -bottom-1 md:bottom-0 left-0 w-full h-10 bg-gradient-to-t from-black to-transparent" id="a-propos">
           </div>
         </div>
-        <div ref={aboutRef} className="flex md:flex-row flex-col justify-between w-[80%] mx-auto rounded-md overflow-hidden my-1 md:my-14">
-          <div className="h-full flex flex-col justify-center items-center p-1">
-            <div className="flex flex-col w-40 h-40 p-10 justify-center">
-              <img src="/avatar.png" alt="" className="animate-[bounce_3s_ease-in-out_infinite]" />
-            </div>
-            <div className="flex flex-row justify-center items-center p-1">
-              <a href="/Description1.pdf" target="_blank" className="flex text-amber-400 hover:cursor-pointer hover:underline font-mono text-xs items-center">
-                <p className="flex">
-                  - Details du portfolio
-                </p>
-              </a>
-            </div>
-            <div>
-              <a href="/unitaire1.pdf" target="_blank" className="flex text-amber-400 hover:cursor-pointer hover:underline font-mono text-xs items-center">
-                <p className="flex">
-                  - Cahier de test unitaire
-                </p>
-              </a>
-            </div>
-          </div>
-          <div className="w-full rounded-lg overflow-hidden">
-            <div className="p-4 bg-neutral-900 w-full h-6 flex items-center">
-              <div className="w-full flex gap-1 justify-end items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+
+        <div
+          ref={aboutRef}
+          className="flex flex-col w-[80%] mx-auto my-1 md:my-14 rounded-md overflow-hidden"
+        >
+
+          <div className="flex flex-col md:flex-row justify-between">
+            <div className="flex flex-col items-center justify-center p-1">
+              <div className="flex items-center justify-center w-40 h-40 p-10">
+                <img
+                  src="/avatar.png"
+                  alt=""
+                  className="animate-[bounce_3s_ease-in-out_infinite]"
+                />
               </div>
             </div>
-            <div className="p-4 bg-neutral-800 flex flex-col justify-center items-center border-b-radius-lg overflow-hidden">
-              <TypewriterEffect words={intro.map((word: string) => {
-                return { text: word }
-              })} />
+
+            <div className="w-full rounded-lg overflow-hidden">
+              <div className="flex items-center p-4 h-6 bg-neutral-900">
+                <div className="flex justify-end items-center gap-1 w-full">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full" />
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center justify-center p-4 bg-neutral-800 overflow-hidden">
+                <TypewriterEffect
+                  words={intro.map((word: string) => ({ text: word }))}
+                />
+              </div>
+              <div className="flex flex-col items-start gap-1 mt-4 text-xs font-mono text-cyan-300">
+                <a href="/Description1.pdf" target="_blank" className="hover:underline hover:text-pink-400">
+                  - Details du portfolio
+                </a>
+                <a href="/unitaire1.pdf" target="_blank" className="hover:underline hover:text-pink-400">
+                  - Cahier de test unitaire
+                </a>
+              </div>
+
             </div>
           </div>
+
+
+
         </div>
+
         <div className="w-full flex p-3" id="competences">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-amber-500">
-            <h2 className="text-yellow-200 font-retro p-2 items-center" >
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
+            <h2 className="text-pink-300 font-retro p-2 items-center" >
               Compétences
             </h2>
           </div>
         </div>
-        <div className="flex p-2">
-          <div className="flex w-full justify-start items-center">
-            <a href="/tableausynthèse.pdf" target="_blank" className="flex text-amber-400 hover:cursor-pointer hover:underline font-retro text-xs p-2 items-center">
-              <div className="flex pr-2 items-center justify-center">
-                <IconTablePlus size={20} className="text-amber-400 items-center" />
-              </div>
-              <p className="flex">
-                Tableau de compétences
-              </p>
+
+        <div className="w-full flex flex-col gap-8 p-4">
+
+          {/* PDF Link */}
+          <div className="flex">
+            <a
+              href="/tableausynthèse.pdf"
+              target="_blank"
+              className="flex items-center gap-2 text-xs font-retro text-pink-400 hover:text-pink-500 hover:underline"
+            >
+              <IconTablePlus size={20} className="text-pink-400" />
+              Tableau de compétences
             </a>
           </div>
-        </div>
-        <div className="flex flex-col w-full gap-28 p-3">
-          <div className="flex md:flex-row flex-col justify-start w-full bg-neutral-900 py-5 rounded-md">
-            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center ">
-              <Card title="Développement" icon={<IconDeviceIpadHorizontalCode size={50} className="text-white overflow-y-auto" />}>
+
+          {/* Development Section */}
+          <div className="flex flex-col md:flex-row w-full bg-slate-900 rounded-2xl p-5 shadow-md shadow-cyan-400/20">
+            <div className="flex flex-col items-center justify-center gap-2 w-full md:w-1/2">
+              <Card
+                title="Développement"
+                icon={<IconDeviceIpadHorizontalCode size={50} className="text-cyan-400" />}
+              >
                 <CanvasRevealEffect
                   animationSpeed={5.1}
-                  containerClassName="bg-emerald-900 shadow-2xl shadow-emerald-200/70"
+                  containerClassName="bg-blue-900 shadow-2xl shadow-pink-500/50"
+                  colors={[[80, 180, 255]]}
+
                 />
               </Card>
-              <div className="w-28 h-8 bg-neutral-700 flex flex-start">
-                <div className="w-full flex gap-1 justify-end items-center px-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+
+              <div className="w-28 h-6 bg-slate-800 rounded flex">
+                <div className="flex items-center justify-end w-full gap-1 px-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full" />
                 </div>
               </div>
-              <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
+              <div className="w-52 h-2 bg-slate-800 rounded-full" />
             </div>
-            <div className="flex w-fit justify-center p-4">
-              <ul className="text-yellow-50 font-mono grid grid-cols-2 md:gap-x-40 gap-x-5">
+
+            <div className="flex justify-center w-fit p-4">
+              <ul className="grid grid-cols-2 gap-x-5 md:gap-x-40 font-mono text-pink-300">
                 {skills.map((word: string, index: number) => (
-                  <li key={index} className="flex items-center">
-                    <span>{'> ' + word}</span>
-                  </li>
+                  <li key={index}>{'> ' + word}</li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="flex md:flex-row flex-col-reverse w-full justify-between py-5 bg-neutral-900">
-            <div className="flex p-10 h-full md:w-1/2 w-full justify-center items-center">
-              <ul className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
-                <li className="flex flex-col gap-4">
-                  <span className="flex gap-2 font-bold items-center">
-                    <FontAwesomeIcon icon={faLinux} className="w-6 h-6" />
+          {/* System Section */}
+          <div className="flex flex-col-reverse md:flex-row justify-between w-full bg-slate-900 rounded-2xl p-5 shadow-md shadow-pink-400/20">
+
+            {/* Linux & Windows */}
+            <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-8">
+              <ul className="flex flex-col gap-6 font-mono text-pink-300">
+                <li className="flex flex-col gap-2">
+                  <span className="flex items-center gap-2 font-bold text-pink-400">
+                    <FontAwesomeIcon icon={faLinux} className="w-5 h-5" />
                     Linux:
                   </span>
-                  <ul className="flex flex-col text-yellow-50 items-start font-mono gap-2 pl-3">
-                    <li className="flex gap-2 items-center">
-                      <IconBrandDebian className="text-pink-600" />
-                      Debian
+                  <ul className="flex flex-col gap-2 pl-3">
+                    <li className="flex items-center gap-2 text-pink-300">
+                      <IconBrandDebian className="text-pink-500" /> Debian
                     </li>
-                    <li className="flex gap-2 items-center">
-                      <IconBrandUbuntu className="text-orange-700" />
-                      Ubuntu
+                    <li className="flex items-center gap-2 text-pink-300">
+                      <IconBrandUbuntu className="text-orange-500" /> Ubuntu
                     </li>
-                    <li className="flex gap-2 items-center">
-                      <FontAwesomeIcon icon={faDragon} className="w-6 h-6 text-blue-900" />
+                    <li className="flex items-center gap-2 text-pink-300">
+                      <FontAwesomeIcon icon={faDragon} className="w-5 h-5 text-blue-600" />
                       Kali Linux
                     </li>
                   </ul>
                 </li>
-                <li className="flex gap-2 items-center font-bold">
-                  <IconBrandWindows className="text-blue-400" />
-                  Windows</li>
+
+                <li className="flex items-center gap-2 font-bold text-pink-400">
+                  <IconBrandWindows className="text-blue-400" /> Windows
+                </li>
               </ul>
             </div>
-            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
-              <Card title="Système" icon={<IconDevicesPc size={50} className="text-white overflow-y-auto" />}>
+
+            {/* System Card */}
+            <div className="flex flex-col items-center justify-center gap-2 w-full md:w-1/2">
+              <Card title="Système" icon={<IconDevicesPc size={50} className="text-pink-400" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
-                  containerClassName="bg-sky-900 shadow-2xl shadow-sky-300/70"
-                  colors={[[50, 180, 255]]}
+                  containerClassName="bg-pink-900 shadow-2xl shadow-pink-500/50"
+                  colors={[[255, 105, 180]]}
+
                 />
               </Card>
-              <div className="w-28 h-8 bg-neutral-700 flex flex-start">
-                <div className="w-full flex gap-1 justify-end items-center px-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+
+              <div className="w-28 h-6 bg-slate-800 rounded flex">
+                <div className="flex items-center justify-end w-full gap-1 px-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full" />
                 </div>
               </div>
-              <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
+              <div className="w-52 h-2 bg-slate-800 rounded-full" />
             </div>
           </div>
 
-          <div className="flex md:flex-row flex-col justify-start w-full py-5 bg-neutral-900">
-            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
-              <Card title="Réseau" icon={<IconAntenna size={50} className="text-white overflow-y-auto" />}>
+          {/* Network Section */}
+          <div className="flex flex-col md:flex-row w-full bg-slate-900 rounded-2xl p-5 shadow-md shadow-pink-400/20">
+            <div className="flex flex-col items-center justify-center gap-2 w-full md:w-1/2">
+              <Card title="Réseau" icon={<IconAntenna size={50} className="text-cyan-400" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
-                  containerClassName="bg-purple-900 shadow-2xl shadow-indigo-300/70"
-                  colors={[[255, 180, 255]]}
+                  containerClassName="bg-cyan-900 shadow-2xl shadow-cyan-500/50"
+                  colors={[[80, 180, 255]]}
 
                 />
               </Card>
-              <div className="w-28 h-8 bg-neutral-700 flex flex-start">
-                <div className="w-full flex gap-1 justify-end items-center px-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+
+              <div className="w-28 h-6 bg-slate-800 rounded flex">
+                <div className="flex items-center justify-end w-full gap-1 px-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full" />
                 </div>
               </div>
-              <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
+              <div className="w-52 h-2 bg-slate-800 rounded-full" />
             </div>
-            <div className="flex w-fit max-w-[500px] p-4">
-              <ul className="flex flex-col justify-center w-full gap-6 font-mono text-yellow-50">
+
+            <div className="flex flex-col justify-center gap-4 p-4 w-full md:w-fit max-w-[500px]">
+              <ul className="flex flex-col gap-4 font-mono text-pink-300">
                 <li>1. Installation d'un serveur Web</li>
                 <li>2. Sécuriser un serveur web</li>
-                <li>3. Adressage IP (avec Cisco Packet tracer)</li>
-                <li>4. Réaliser des machines virtuelles</li>
-                <li>5. Réalisation d'une connexion SSH entre machine virtuelle dans un réseau local</li>
+                <li>3. Adressage IP (Cisco Packet Tracer)</li>
+                <li>4. Machines virtuelles</li>
+                <li>5. Connexion SSH (réseau local)</li>
               </ul>
             </div>
           </div>
 
-          <div className="flex md:flex-row flex-col-reverse justify-between w-full py-5 bg-neutral-900">
-            <div className='flex p-15 h-full md:w-1/2 w-full justify-center items-center'>
-              <ol className="flex flex-col text-yellow-50 items-start gap-8 font-mono">
-                <li className="flex items-center">{'>' + ' Anglais' + ' C1'}</li>
-                <li className="flex items-center">{'>' + ' Français' + ' C1'}</li>
-                <li className="flex items-center">{'>' + ' Arabe' + ' Langue maternelle'}</li>
+          {/* Languages Section */}
+          <div className="flex flex-col-reverse md:flex-row justify-between w-full bg-slate-900 rounded-2xl p-5 shadow-md shadow-pink-400/20">
+
+            <div className="flex items-center justify-center w-full md:w-1/2 p-8">
+              <ol className="flex flex-col gap-6 font-mono text-pink-300">
+                <li>{'> Anglais C1'}</li>
+                <li>{'> Français C1'}</li>
+                <li>{'> Arabe (langue maternelle)'}</li>
               </ol>
             </div>
-            <div className="md:w-1/2 w-full h-full flex gap-2 flex-col justify-center items-center">
-              <Card title="Langues" icon={<IconLanguage size={50} className="text-white overflow-y-auto" />}>
+
+            <div className="flex flex-col items-center justify-center gap-2 w-full md:w-1/2">
+              <Card title="Langues" icon={<IconLanguage size={50} className="text-pink-400" />}>
                 <CanvasRevealEffect
                   animationSpeed={5.1}
-                  containerClassName="bg-yellow-600 shadow-2xl shadow-yellow-200/70"
-                  colors={[[255, 255, 155]]}
-
+                  containerClassName="bg-pink-900 shadow-2xl shadow-pink-500/50"
+                  colors={[[255, 105, 180]]}
                 />
               </Card>
-              <div className="w-28 h-8 bg-neutral-700 flex flex-start">
-                <div className="w-full flex gap-1 justify-end items-center px-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+
+              <div className="w-28 h-6 bg-slate-800 rounded flex">
+                <div className="flex items-center justify-end w-full gap-1 px-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full" />
                 </div>
               </div>
-              <div className="w-52 h-2 bg-neutral-700 rounded-full"></div>
+              <div className="w-52 h-2 bg-slate-800 rounded-full" />
             </div>
           </div>
         </div>
+
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-500">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
             <h2 className="text-pink-300 font-retro p-2 items-center" id="parcours">
               Parcours
             </h2>
@@ -727,144 +769,167 @@ export default function HomePage() {
           </div>
         </div>
         <div className="p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-cyan-500">
-            <h2 className="text-blue-300 font-retro p-2 items-center" id="experience">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-cyan-400">
+            <h2 className="text-cyan-300 font-retro p-2 items-center" id="experience">
               Experiences
             </h2>
           </div>
-          <div className="flex flex-col justify-start pt-2">
-            <a href="/rapport-1er.pdf" className="text-cyan-400 flex hover:cursor-pointer hover:underline font-retro text-xs items-center">
-              <div className=" flex items-center p-2">
-                <IconReportSearch size={20} className="text-cyan-400 overflow-y-auto" />
+
+          <div className="w-full flex flex-col">
+
+            <div className="flex justify-center w-full py-4">
+              <div className="w-full lg:w-3/4">
+                <StickyScroll content={content} />
               </div>
-              Rapport stage 1er année
-            </a>
-            <a href="/rapport-2éme.pdf" className="text-cyan-400 flex hover:cursor-pointer hover:underline font-retro text-xs items-center">
-              <div className=" flex items-center p-2">
-                <IconReportSearch size={20} className="text-cyan-400 overflow-y-auto" />
-              </div>
-              Rapport stage 2ème année
-            </a>
-          </div>
-          <div className="w-full flex flex-col justify-center items-center">
-            <div className="lg:w-3/4 w-full py-4">
-              <StickyScroll content={content} />
             </div>
+
+            <div className="flex flex-col justify-start gap-2 pl-4">
+              <a
+                href="/rapport-1er.pdf"
+                className="flex items-center font-mono gap-2 text-xs text-cyan-400 hover:underline"
+              >
+                <IconReportSearch size={20} className="text-cyan-400" />
+                Rapport stage 1er année
+              </a>
+              <a
+                href="/rapport-2éme.pdf"
+                className="flex items-center font-mono gap-2 text-xs text-cyan-400 hover:underline"
+              >
+                <IconReportSearch size={20} className="text-cyan-400" />
+                Rapport stage 2ème année
+              </a>
+            </div>
+
           </div>
+
         </div>
         <div className="w-full flex flex-col justify-center items-center p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-purple-500">
-            <h2 className="text-purple-400 font-retro p-2 items-center" id="projets">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
+            <h2 className="text-pink-300 font-retro p-2 items-center" id="projets">
               Projets
             </h2>
           </div>
+
           <div className="w-full flex flex-col justify-center items-center">
-            <div className="flex border-[15px] min-h-[400px] h-[300px] md:w-[52%] w-[80%] max-w-[700px] border-neutral-900 rounded-md mt-10">
-              <div className="flex flex-col justify-start min-h-[300px] w-full bg-radial from-indigo-300/30 to-neutral-900">
-                <div className="flex md:flex-row flex-col flex-wrap gap-4 p-4">
-                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/webtoona.png" alt="" className="w-full"
+            <div className="flex border-[15px] min-h-[300px] h-auto md:w-[52%] w-[90%] max-w-[700px] border-slate-950 rounded-md mt-10 overflow-hidden">
+
+              <div className="w-full bg-radial from-indigo-300/30 to-slate-950 p-4">
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-row md:flex-wrap gap-4">
+
+                  <div className="flex flex-col items-center justify-center cursor-pointer hover:bg-slate-500/40 p-2 rounded-md">
+                    <img
+                      src="/webtoona.png"
+                      alt=""
+                      className="w-12 md:w-14"
                       onClick={() => setShowPopup("webtoona")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">Webtoona</p>
                   </div>
-                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/jeu.png" alt="" className="w-full"
+
+                  <div className="flex flex-col items-center justify-center cursor-pointer hover:bg-slate-500/40 p-2 rounded-md">
+                    <img
+                      src="/jeu.png"
+                      alt=""
+                      className="w-12 md:w-14"
                       onClick={() => setShowPopup("jeu")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">jeu devinette</p>
                   </div>
-                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/mode.png" alt="" className="p-1 w-full"
+
+                  <div className="flex flex-col items-center justify-center cursor-pointer hover:bg-slate-500/40 p-2 rounded-md">
+                    <img
+                      src="/mode.png"
+                      alt=""
+                      className="w-12 md:w-14"
                       onClick={() => setShowPopup("mode")}
                     />
                     <p className="font-mono text-amber-50 text-[10px] text-center">Walk your worth</p>
                   </div>
-                  <div className="flex flex-col items-center justify-center min-w-10 w-[10%] md:w-16 cursor-pointer hover:bg-slate-500/40 text-blue-500">
-                    <img src="/glowup.png" alt="" className="p-1 w-full"
+
+                  <div className="flex flex-col items-center justify-center cursor-pointer hover:bg-slate-500/40 p-2 rounded-md">
+                    <img
+                      src="/glowup.png"
+                      alt=""
+                      className="w-12 md:w-14"
                       onClick={() => setShowPopup("glowup")}
                     />
-                    <p className="font-mono text-amber-50 text-[10px] text-center">GlowUp</p>  
+                    <p className="font-mono text-amber-50 text-[10px] text-center">GlowUp</p>
                   </div>
+
                 </div>
               </div>
-            </div>
-            <div className="relative w-[85%] h-40 max-w-[1155px] bg-neutral-900 border-4 border-neutral-800 trapezoid md:flex hidden">
-              <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-30 max-w-[1155px] justify-center items-center bg-neutral-950 trapezoid md:flex hidden'>
-                <div className="absolute inset-0 flex flex-col gap-3 items-center justify-center text-white font-bold">
-                  <div className='flex gap-1'>
-                    {['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((item) => (
-                      <div
-                        key={item}
-                        className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                  <div className='flex gap-3'>
-                    {['Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'].map((item) => (
-                      <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
-                    ))}
-                  </div>
-                  <div className='flex gap-5'>
-                    {['W', 'X', 'C', 'V', 'B', 'N', '?', ';', '/', '!'].map((item) => (
-                      <div key={item} className="w-10 h-6 flex items-center justify-center bg-black trapezoid cursor-pointer hover:scale-80 transition-all">{item}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-[85%] max-w-[1155px] h-10 bg-neutral-900 rounded-b-md md:flex hidden">
             </div>
           </div>
+
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-green-500">
-            <h2 className="text-emerald-400 font-retro p-2 items-center" id="certificats">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
+            <h2 className="text-pink-300 font-retro p-2 items-center" id="certificats">
               Certificats
             </h2>
           </div>
-          <div className="w-full flex lg:flex-row p-6 flex-col gap-4">
-            <div className="flex lg:w-1/2 w-full h-auto p-4 flex-wrap border-1 hover:bg-lime-500/20 rounded-3xl hover:text-black border-lime-500">
-              <div className="aspect-square w-30">
+
+          <div className="flex flex-col lg:flex-row w-full p-4 gap-4">
+
+            <div className="flex flex-col flex-wrap w-full lg:w-1/2 p-3 gap-3 border border-lime-500 rounded-3xl hover:bg-lime-500/20 hover:text-black">
+              <div className="w-20 aspect-square">
                 <img src="/cisco.png" alt="cisco" />
               </div>
-              <div className="flex flex-col gap-6 p-2 animate-pulse">
-                <div className="p-2 font-retro md:text-md text-xs text-white text-left">
-                  <a href="https://www.credly.com/badges/954629da-abc1-4555-a7a0-00de21cc6e82/public_url" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats Packet Tracer'}</a>
-                </div>
-                <div className="p-2 font-retro md:text-md text-xs text-white text-left">
-                  <a href="https://www.credly.com/badges/794a361b-e669-4e7a-b1f9-46397b490117/public_url" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats Networking Basics'}</a>
-                </div>
-                <div className="p-2 font-retro md:text-md text-xs text-white text-left">
-                  <a href="https://www.credly.com/badges/33998236-9232-463a-9233-31a382222222/public_url" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats CSS Essentials'}</a>
-                </div>
-              </div>
-            </div>
-            <div className="flex lg:w-1/2 w-full p-4 gap-5 flex-wrap border-blue-400 hover:bg-blue-400/20 rounded-3xl hover:text-black border-1">
-              <div className="aspect-square w-30">
-                <img src="/google.png" alt="google" />
-              </div>
-              <div className="p-5 font-retro md:text-md text-xs text-white text-left animate-pulse">
-                <a href="https://skillshop.credential.net/0ba5138b-cd46-46a4-8281-fb65858efc83#acc.3xiEL4qI" className="hover:cursor-pointer hover:underline" >{'>' + ' Certificats Google Analytics'}</a>
-              </div>
-            </div>
-            <div className="flex lg:w-1/2 w-full p-3 gap-5 flex-wrap border-red-500 hover:bg-red-400/20 rounded-3xl hover:text-black border-1">
-              <div className="aspect-square w-30">
-                <img className="w-full h-30" src="/pix.png" alt="pix" />
-              </div>
-              <div className="p-5 font-retro md:text-md text-xs text-white text-left animate-pulse">
-                <a href="/pix.pdf" target="_blank" rel="noopener noreferrer">
-                  <p className="hover:cursor-pointer hover:underline">{'>' + ' Certificats Pix'}</p>
+              <div className="flex flex-col gap-1 animate-pulse">
+                <a
+                  href="https://www.credly.com/badges/954629da-abc1-4555-a7a0-00de21cc6e82/public_url"
+                  className="text-[12px] text-white font-mono text-left hover:underline hover:text-amber-400"
+                >
+                  {'> Certificats Packet Tracer'}
+                </a>
+                <a
+                  href="https://www.credly.com/badges/794a361b-e669-4e7a-b1f9-46397b490117/public_url"
+                  className="text-[12px] text-white font-mono text-left hover:underline hover:text-amber-400"
+                >
+                  {'> Certificats Networking Basics'}
+                </a>
+                <a
+                  href="https://www.credly.com/badges/33998236-9232-463a-9233-31a382222222/public_url"
+                  className="text-[12px] text-white font-mono text-left hover:underline hover:text-amber-400"
+                >
+                  {'> Certificats CSS Essentials'}
                 </a>
               </div>
             </div>
+
+            <div className="flex flex-col flex-wrap w-full lg:w-1/2 p-3 gap-2 border border-blue-400 rounded-3xl hover:bg-blue-400/20 hover:text-black">
+              <div className="w-20 aspect-square">
+                <img src="/google.png" alt="google" />
+              </div>
+              <a
+                href="https://skillshop.credential.net/0ba5138b-cd46-46a4-8281-fb65858efc83#acc.3xiEL4qI"
+                className="text-[12px] text-white font-mono text-left animate-pulse hover:underline hover:text-cyan-400"
+              >
+                {'> Certificats Google Analytics'}
+              </a>
+            </div>
+
+            <div className="flex flex-col flex-wrap w-full lg:w-1/2 p-3 gap-2 border border-red-500 rounded-3xl hover:bg-red-400/20 hover:text-black">
+              <div className="w-20 aspect-square">
+                <img src="/pix.png" alt="pix" className="w-full h-full" />
+              </div>
+              <a
+                href="/pix.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[12px] text-white font-mono text-left animate-pulse hover:underline hover:text-rose-400"
+              >
+                {'> Certificats Pix'}
+              </a>
+            </div>
+
           </div>
+
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-rose-500">
-            <h2 className="text-rose-400 font-retro p-2 items-center " id="veille">
+          <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
+            <h2 className="text-pink-300 font-retro p-2 items-center " id="veille">
               Veille Technologique
             </h2>
           </div>
@@ -880,7 +945,7 @@ export default function HomePage() {
                 </div>
                 <div className="p-4 bg-neutral-800 flex flex-col justify-center items-center border-b-radius-lg overflow-hidden">
                   <div className="w-full flex justify-center items-center">
-                    <h3 className="text-indigo-500 font-retro p-2 items-center">Les frameworks et la performance sur le web</h3>
+                    <h3 className="text-cyan-400 md:font-retro font-mono md:text-sm text-xs p-2 items-center">Les frameworks et la performance sur le web</h3>
                   </div>
                   <TypewriterEffect words={veille.map((word: string) => {
                     return { text: word }
@@ -890,9 +955,9 @@ export default function HomePage() {
             </div>
           </div>
           <div>
-            <div className="flex flex-col bg-neutral-900 p-4 justify-between w-[80%] mx-auto rounded-md overflow-hidden my-2">
+            <div className="flex flex-col bg-neutral-900/50 p-4 justify-between w-[80%] mx-auto rounded-md overflow-hidden my-2">
               <div className="pb-4">
-                <h3 className="text-green-400 font-retro text-center items-center">Problematique</h3>
+                <h3 className="text-emerald-400 font-retro text-xs text-center items-center">Problematique</h3>
               </div>
               <div className="w-full rounded-lg overflow-hidden">
                 <div className="w-full rounded-lg overflow-hidden">
@@ -903,7 +968,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="flex flex-col w-full transition-all rounded-md">
-              <h2 className="text-rose-400 text-xs font-retro pl-6 p-4 text-center">
+              <h2 className="text-pink-400 text-xs font-retro pl-6 p-4 text-center">
                 Performance web et méthodologie d’évaluation
               </h2>
             </div>
@@ -922,111 +987,130 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div>
-          <div className="w-full flex flex-col">
-            <div className="pl-4 pr-4 w-full flex justify-center items-center">
-              <div className="flex w-full self-center items-center justify-center border text-center  transition-all rounded-md border-indigo-500">
-                <h2 className="text-indigo-400 font-retro p-2 items-center" id="contact">
-                  Contact
-                </h2>
-              </div>
-            </div>
-            <div className="w-full h-full flex">
-              <div className="relative flex flex-col w-full h-full">
-                <div style={{ width: '100%', height: '600px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <DarkVeil />
-                </div>
-                <div className="w-full h-full flex flex-col justify-center items-center py-0 absolute top-2/5 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <AnimatePresence mode='popLayout'>
-                    {sendEmailStatus === 'success' ? (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{
-                          opacity: [0, 1, 0, 1, 0, 1, 0, 1],
-                          y: [0, 0, 0, 0, 0, 0, 0, 0],
-                        }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 2 }}
-                        className="flex items-center gap-2 py-4">
-                        <IconCheck className="w-4 h-4 text-green-500" />
-                        <span className="text-green-500 font-retro text-[10px]">
-                          Message envoyé
-                        </span>
-                      </motion.div>
-                    ) : sendEmailStatus === 'error' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex items-center gap-2 py-4">
-                        <IconX className="w-4 h-4 text-red-500" />
-                        <span className="text-red-500 font-retro text-[10px]">
-                          Erreur lors de l'envoi du message
-                        </span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  <div className="bg-black/50 border border-white/20 rounded-2xl w-2/3">
-                    <FormikProvider value={formik}>
-                      <Form className="flex flex-col w-full gap-4 p-4">
-                        <div className="flex flex-col gap-2 md:p-2 p-0">
-                          <label htmlFor="name" className="text-white font-retro text-xs">Nom</label>
-                          <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            className="text-white border border-white/20 rounded-md shadow-md shadow-neutral-950 hover:bg-neutral-700/20 backdrop-blur-3xl p-2 bg-transparent"
-                            value={formik.values.name}
-                            onChange={(e: any) => formik.setFieldValue("name", e.target.value)} />
-                        </div>
-                        <div className="flex flex-col gap-2 md:p-2 p-0">
-                          <label htmlFor="email" className="text-white font-retro text-xs">Email</label>
-                          <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            className="text-white border border-white/20 rounded-md shadow-md shadow-neutral-950 hover:bg-neutral-700/20 backdrop-blur-3xl p-2 bg-transparent"
-                            value={formik.values.email}
-                            onChange={(e: any) => formik.setFieldValue("email", e.target.value)} />
-                        </div>
-                        <div className="flex flex-col gap-2 md:p-2 p-0">
-                          <label htmlFor="message" className="text-white font-retro text-xs">Message</label>
-                          <textarea
-                            id="message"
-                            name="message"
-                            rows={4}
-                            className="text-white border border-white/20 rounded-md shadow-md shadow-neutral-950 hover:bg-neutral-700/20 backdrop-blur-3xl p-2 bg-transparent resize-none"
-                            value={formik.values.message}
-                            onChange={(e: any) => formik.setFieldValue("message", e.target.value)} />
-                        </div>
-                        <div className="flex flex-col gap-2 md:p-2 p-0">
-                          <button type="submit" className="bg-indigo-500 hover:bg-indigo-700 cursor-pointer hover:scale-110 text-white text-xs font-retro p-2 rounded-md self-center transition-all">Envoyer</button>
-                        </div>
-                      </Form>
-                    </FormikProvider>
-                  </div>
-                </div>
-              </div>
+
+        <div className="w-full flex flex-col py-6 px-4 rounded-2xl">
+
+          <div className="flex justify-center w-full mb-4">
+            <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
+              <h2 className="text-pink-300 font-retro p-2 items-center" id="parcours">
+                Contact
+              </h2>
             </div>
           </div>
+
+          <div className="flex justify-center w-full p-8">
+            <div className="relative w-full max-w-md flex flex-col items-center gap-4">
+
+              <AnimatePresence mode="popLayout">
+                {sendEmailStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: [0, 1, 0, 1], y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 1.5 }}
+                    className="flex items-center gap-2 py-2 text-[10px] text-green-400 font-mono"
+                  >
+                    <IconCheck className="w-4 h-4 text-green-400" />
+                    <span>Message envoyé</span>
+                  </motion.div>
+                )}
+                {sendEmailStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center gap-2 py-2 text-[10px] text-red-500 font-mono"
+                  >
+                    <IconX className="w-4 h-4 text-red-500" />
+                    <span>Erreur lors de l'envoi du message</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="w-full p-5 border border-pink-600/50 bg-slate-950/60 backdrop-blur-md shadow-lg shadow-pink-500/20">
+                <FormikProvider value={formik}>
+                  <Form className="flex flex-col gap-3">
+
+                    <div className="flex flex-col gap-1">
+                      <label htmlFor="name" className="text-pink-300 font-retro text-[10px] tracking-wide">
+                        Nom
+                      </label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        className="w-full p-2 text-white bg-transparent font-mono border border-pink-500/40 shadow-md shadow-pink-400/20 placeholder:text-pink-500 text-[10px] focus:outline-none focus:ring-1 focus:ring-pink-400"
+                        placeholder="Votre nom"
+                        value={formik.values.name}
+                        onChange={(e: any) => formik.setFieldValue("name", e.target.value)}
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <label htmlFor="email" className="text-pink-300 font-retro text-[10px] tracking-wide ">
+                        Email
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        className="w-full p-2 text-white bg-transparent font-mono border border-pink-500/40 shadow-md shadow-pink-400/20 placeholder:text-pink-500 text-[10px] focus:outline-none focus:ring-1 focus:ring-pink-400"
+                        placeholder="Votre email"
+                        value={formik.values.email}
+                        onChange={(e: any) => formik.setFieldValue("email", e.target.value)}
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <label htmlFor="message" className="text-pink-300 font-retro text-[10px] tracking-wide">
+                        Message
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        className="w-full p-2 text-white bg-transparent font-mono border border-pink-500/40 shadow-md shadow-pink-400/20 placeholder:text-pink-500 resize-none text-[10px] focus:outline-none focus:ring-1 focus:ring-pink-400"
+                        placeholder="Votre message"
+                        value={formik.values.message}
+                        onChange={(e: any) => formik.setFieldValue("message", e.target.value)}
+                      />
+                    </div>
+
+                    {/* Submit */}
+                    <button
+                      type="submit"
+                      className="self-center px-4 py-2 text-[8px] font-retro text-white bg-pink-500 rounded-md shadow-lg shadow-pink-400/50 hover:bg-pink-600 hover:scale-105 hover:cursor-pointer transition-all font-bold tracking-wide"
+                    >
+                      Envoyer
+                    </button>
+
+                  </Form>
+                </FormikProvider>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="w-full flex flex-row gap-3 justify-start items-center mt-6">
+            <a
+              href="https://www.linkedin.com/in/manal-khalqallah-33a35133b/"
+              target="_blank"
+              className="p-1 rounded-full bg-slate-900 hover:bg-pink-500/40 transition-colors"
+            >
+              <IconBrandLinkedinFilled className="w-8 h-8 text-pink-400" />
+            </a>
+            <a
+              href="https://www.canva.com/design/DAGTpe1Bpas/8g7d57zcpligpH_Tzytm3w/edit?utm_content=DAGTpe1Bpas&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+              target="_blank"
+              className="p-1 rounded-full bg-slate-900 hover:bg-pink-500/40 transition-colors"
+            >
+              <IconFileCv className="w-8 h-8 text-pink-400" />
+            </a>
+          </div>
+
         </div>
-        <div className="w-full h-20 flex flex-row gap-3 bg-blue-950/50 justify-start items-center p-4">
-          <a
-            className="bg-blue-900 rounded-full p-1 hover:bg-blue-700 transition-all"
-            href="https://www.linkedin.com/in/manal-khalqallah-33a35133b/"
-            target="_blank"
-          >
-            <IconBrandLinkedinFilled className="w-8 h-8 p-1 text-white" />
-          </a>
-          <a
-            className="bg-blue-900 rounded-full p-1 hover:bg-blue-700 transition-all"
-            href="https://www.canva.com/design/DAGTpe1Bpas/8g7d57zcpligpH_Tzytm3w/edit?utm_content=DAGTpe1Bpas&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-            target="_blank"
-          >
-            <IconFileCv className="w-8 h-8 p-1 text-white" />
-          </a>
-        </div>
+
       </div >
     </>
   )

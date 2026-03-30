@@ -38,8 +38,8 @@ export const AnimatedTestimonials = ({
   }, [autoplay]);
 
   return (
-    <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-      <div className="flex flex-col gap-20">
+    <div className="mx-auto max-w-sm px-2 py-8 font-sans antialiased md:max-w-4xl md:px-4">
+      <div className="flex flex-col gap-10">
         <div>
           <div className="relative w-full aspect-[16/9] max-h-[540px]">
             <AnimatePresence>
@@ -84,7 +84,7 @@ export const AnimatedTestimonials = ({
                     </div> 
                     <div className="flex items-center justify-center rounded-3xl ">
                       <h3
-                        className="font-retro text-white text-center py-2 px-4 rounded-3xl"
+                        className="font-retro text-white text-center rounded-3xl"
                       >
                         {testimonial.name}
                       </h3>
@@ -97,18 +97,18 @@ export const AnimatedTestimonials = ({
         </div>
 
         <div className="flex flex-col justify-between py-4 z-40 w-full items-center">
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="flex gap-4 md:gap-8">
             <button
               onClick={handlePrev}
               className="group/button flex h-7 w-7 items-center justify-center"
             >
-              <IconArrowLeft className="h-5 w-5 text-green-500 transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
+              <IconArrowLeft className="h-5 w-5 text-amber-500 transition-transform duration-300 hover:cursor-pointer group-hover/button:rotate-12 dark:text-neutral-400" />
             </button>
             <button
               onClick={handleNext}
               className="group/button flex h-7 w-7 items-center justify-center"
             >
-              <IconArrowRight className="h-5 w-5 text-green-500 transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
+              <IconArrowRight className="h-5 w-5 text-amber-500 transition-transform duration-300 hover:cursor-pointer dark:text-neutral-400" />
             </button>
           </div>
         </div>

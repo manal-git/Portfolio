@@ -33,7 +33,7 @@ export const Popup = ({
                     <div className="w-6 h-6">
                         <img src={icon} alt="" />
                     </div>
-                    <h2 className="text-amber-50 font-mono">
+                    <h2 className="text-amber-50 font-mono md:text-sm text-xs">
                         {title}
                     </h2>
                 </div>
@@ -42,16 +42,16 @@ export const Popup = ({
                 </div>
             </div>
             <div className="flex flex-col px-10">
-                <div className="text-green-400 w-full font-mono py-5">
+                <div className="text-slate-200 w-full font-mono md:text-sm text-xs py-5">
                     {description}
                 </div>
                 <div className="flex gap-2 mt-2">
-                    <div>
+                    <div className="">
                         <img src="/book.png" alt="" className="w-6 h-6" />
                     </div>
-                    <div>
+                    <div className="">
                         {doc && (
-                            <Link href={doc} target="_blank" className="text-blue-500 font-mono hover:cursor-pointer hover:underline">
+                            <Link href={doc} target="_blank" className="text-blue-500 font-mono md:text-sm text-xs hover:cursor-pointer hover:underline">
                                 Cahier de charges/ Spécification technique
                             </Link>
                         )}
@@ -63,14 +63,14 @@ export const Popup = ({
                     </div>
                     <div className="">
                         {gitlink && (
-                            <Link href={gitlink} target="_blank" className="text-blue-500 font-mono hover:cursor-pointer hover:underline">
+                            <Link href={gitlink} target="_blank" className="text-blue-500 font-mono md:text-sm text-xs hover:cursor-pointer hover:underline">
                                 Github
                             </Link>
                         )}
                     </div>
                 </div>
                 <div>
-                    {testimonials && <div className="mt-6">{testimonials}</div>}
+                    {testimonials && <div className="md:mt-5  md:text-sm text-xs">{testimonials}</div>}
                 </div>
             </div>
         </motion.div>

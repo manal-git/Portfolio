@@ -79,7 +79,7 @@ const GlowingEffect = memo(
             parseFloat(element.style.getPropertyValue("--start")) || 0;
           let targetAngle =
             (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) /
-              Math.PI +
+            Math.PI +
             90;
 
           const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
@@ -140,22 +140,22 @@ const GlowingEffect = memo(
               "--gradient":
                 variant === "white"
                   ? `repeating-conic-gradient(
-                  from 236.84deg at 50% 50%,
-                  var(--black),
-                  var(--black) calc(25% / var(--repeating-conic-gradient-times))
-                )`
-                  : `radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
-                radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
-                radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%), 
-                radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
-                repeating-conic-gradient(
-                  from 236.84deg at 50% 50%,
-                  #dd7bbb 0%,
-                  #d79f1e calc(25% / var(--repeating-conic-gradient-times)),
-                  #5a922c calc(50% / var(--repeating-conic-gradient-times)), 
-                  #4c7894 calc(75% / var(--repeating-conic-gradient-times)),
-                  #dd7bbb calc(100% / var(--repeating-conic-gradient-times))
-                )`,
+        from 236.84deg at 50% 50%,
+        var(--black),
+        var(--black) calc(25% / var(--repeating-conic-gradient-times))
+      )`
+                  : `radial-gradient(circle, #22d3ee 10%, transparent 20%),   /* cyan */
+       radial-gradient(circle at 40% 40%, #3b82f6 8%, transparent 18%), /* blue */
+       radial-gradient(circle at 60% 60%, #ec4899 10%, transparent 20%), /* pink */
+       radial-gradient(circle at 50% 70%, #a855f7 8%, transparent 18%),  /* purple */
+       repeating-conic-gradient(
+         from 236.84deg at 50% 50%,
+         #22d3ee 0%,   /* cyan */
+         #3b82f6 calc(25% / var(--repeating-conic-gradient-times)), /* blue */
+         #a855f7 calc(50% / var(--repeating-conic-gradient-times)), /* purple */
+         #ec4899 calc(75% / var(--repeating-conic-gradient-times)), /* pink */
+         #22d3ee calc(100% / var(--repeating-conic-gradient-times))
+       )`,
             } as React.CSSProperties
           }
           className={cn(
