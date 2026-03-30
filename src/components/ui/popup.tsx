@@ -31,7 +31,7 @@ export const Popup = ({
             <div className="bg-neutral-700 w-full h-8 px-2 flex justify-between items-center">
                 <div className="flex gap-2">
                     <div className="w-6 h-6">
-                        <img src={icon} alt="" />
+                        <img src={icon} alt=""/>
                     </div>
                     <h2 className="text-amber-50 font-mono md:text-sm text-xs">
                         {title}
