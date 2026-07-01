@@ -42,7 +42,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-retro: "Press Start 2P";
+  /* --font-retro: "Press Start 2P"; */
+}
+
+.font-retro {
+  font-family: "Press Start 2P", cursive;
 }
 
 :root {

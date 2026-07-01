@@ -101,6 +101,7 @@ const navItems = [
 type Testimonial = { name: string; src: string };
 type ProjectKey = "webtoona" | "jeu" | "mode" | "glowup";
 type ProjectData = {
+  doc2: string | undefined;
   title: string;
   description: string;
   icon: string;
@@ -281,6 +282,7 @@ export default function HomePage() {
       description: " > Le projet consiste en la création d'une application web permettant aux utilisateurs de suivre leur progression dans la lecture de BD et de publier leur propre BD. L'application offre une gestion personnalisée des bibliothèques de BD, ainsi que des fonctionnalités interactives telles que des notes et des commentaires. Le public visé est constitué de lecteurs grand public qui souhaitent gérer et suivre la lecture de BD.",
       icon: "webtoona.png",
       doc: "https://drive.google.com/file/d/1GsdEKg3wlS-4F0wkT0LZHaoowFRGlrub/view?usp=sharing",
+      doc2: "",
       gitlink: "https://github.com/manal-git/WEBtoon.git",
       testimonials: [
         { name: "Accueil", src: "/webtoon.png" },
@@ -298,6 +300,7 @@ export default function HomePage() {
       description: "> Ce projet consiste à développer un jeu interactif simple où un joueur doit deviner un chiffre aléatoire généré par le programme, avec des fonctionnalités permettant d'indiquer si le joueur a deviné correctement ou s'il doit ajuster sa tentative ou tout simplement qu’il a gagné.",
       icon: "jeu.png",
       doc: "https://drive.google.com/file/d/1QacY8gVtLnpdff6qxwembGM_9QbCLNW9/view?usp=sharing",
+      doc2: "",
       gitlink: "https://github.com/manal-git/jeux_nombre.git",
       testimonials: [
         { name: "L'accueil", src: "/jeu1.png" },
@@ -311,6 +314,7 @@ export default function HomePage() {
       description: "> Site web L’application mobile dédiée offrira une expérience personnalisée, permettant aux utilisateurs de suivre le défilé, d’accéder à un vote en temps réel des tenus défiler et une moyen final et partager a la fin.",
       icon: "mode.png",
       doc: "https://drive.google.com/file/d/1aLg76xXbdXadlSmPAgKdVQMMxNj0eS2n/view?usp=sharing",
+      doc2: "",
       gitlink: "https://github.com/manal-git/mode.git",
       testimonials: [
         { name: "Accueil", src: "/mode1.png" },
@@ -328,6 +332,7 @@ export default function HomePage() {
       etc.), et de gérer leurs rendez-vous.`,
       icon: "glowup.png",
       doc: "/Description2.pdf",
+      doc2: "/unitaire2.pdf",
       gitlink: "https://github.com/manal-git/GlowUp.git",
       testimonials: [
         { name: "Connexion", src: "/glowup1.png" },
@@ -400,6 +405,7 @@ export default function HomePage() {
                   description={data.description}
                   icon={data.icon}
                   doc={data.doc}
+                  doc2={data.doc2}  
                   gitlink={data.gitlink}
                   onClose={() => setShowPopup(null)}
                   testimonials={
