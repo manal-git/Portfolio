@@ -119,11 +119,12 @@ const press = Press_Start_2P({
 
 export default function HomePage() {
 
-  const intro = ["Je", "me", "présente!", "Je", "suis", "étudiante", "en", "BTS", "Services", "Informatiques",
+  const intro = ["Je", "me", "présente!", "Je", "suis", "titulaire", "d\u0027un", "BTS", "Services", "Informatiques",
     "aux", "Organisations", "(SIO),", "spécialisée", "dans", "le", "développement", "d'applications.",
     "Ce", "portfolio", "témoigne", "de", "mon", "engagement", "à", "transformer", "les", "compétences",
     "acquises", "au", "cours", "de", "ma", "formation", "en", "réalisations", "concrètes", "et", "structurées,",
-    "illustrant", "ma", "passion", "pour", "l'informatique", "et", "mon", "envie", "constante", "d'apprendre", "et", "d'évoluer.", "Bienvenue", "et", "bonne", "découverte", "de", "mon", "portfolio."];
+    "illustrant", "ma", "passion", "pour", "l'informatique", "et", "mon", "envie", "constante", "d'apprendre", "et",
+    "d'évoluer.", "Bienvenue", "et", "bonne", "découverte", "de", "mon", "portfolio."];
   const veille = [
     "Cette", "veille", "porte", "sur", "l’impact", "du", "choix", "d’un", "framework",
     "sur", "la", "performance", "d’une", "application", "web.",
@@ -206,7 +207,7 @@ export default function HomePage() {
   const content = [
     {
       title: "Professionnelle",
-      subtitle: "Stage chez Turnadon du 18 mai au 4 juillet et du 01 decembre au 23 janvier - Paris (2025-2026)",
+      subtitle: "Stage chez Turnadon - Paris (2025-2026)",
       description: [
         "Développement front-end avec React, Tailwind CSS et Redux Toolkit (pages, thèmes, responsive design).",
         "Développement back-end avec Node.js et Express (API REST, base de données, routes).",
@@ -264,6 +265,7 @@ export default function HomePage() {
         "2024 : Conception d’un projet de défilé de mode avec site web d’un systeme de vote.",
         "2024 : Conception d'un jeu de devinette d'un nombre aléatoire.",
         "2025 : Création d'un portfolio web en utilisant les compétences acquises pendant le stage.",
+        "2026 : Création d’une application mobile/web, destinée à faciliter la prise de rendez-vous dans les salons de beauté"
       ],
       content: (
         <motion.div
@@ -1002,7 +1004,7 @@ export default function HomePage() {
 
           <div className="flex justify-center w-full mb-4">
             <div className="flex w-full self-center items-center justify-center border text-center transition-all rounded-md border-pink-400">
-              <h2 className="text-pink-300 font-retro p-2 items-center" id="parcours">
+              <h2 className="text-pink-300 font-retro p-2 items-center" id="contact">
                 Contact
               </h2>
             </div>
@@ -1111,7 +1113,7 @@ export default function HomePage() {
               <IconBrandLinkedinFilled className="w-8 h-8 text-pink-400" />
             </a>
             <a
-              href="https://www.canva.com/design/DAGTpe1Bpas/8g7d57zcpligpH_Tzytm3w/edit?utm_content=DAGTpe1Bpas&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+              href="/cv-manal.pdf"
               target="_blank"
               className="p-1 rounded-full bg-slate-900 hover:bg-pink-500/40 transition-colors"
             >
